@@ -1,17 +1,27 @@
+import { useState } from "react";
 import SwitchOff from "../../../assets/Switch.svg";
 import SwitchOn from "../../../assets/SwitchOn.svg";
 import { StyledTableRow, StyleTableCell } from "./tabbleCSS";
 
-function TableDetail() {
+
+
+function TableDetail(props:any) {
+  const product =props.product;
+  const index= props.index;
+
+  
+  
+
   return (
     <StyledTableRow>
-      <StyleTableCell sx={{ width: "29px" }}>1</StyleTableCell>
-      <StyleTableCell sx={{ width: "181px" }}>Programs</StyleTableCell>
-      <StyleTableCell sx={{ width: "306px" }}>Run Time</StyleTableCell>
-      <StyleTableCell sx={{ width: "306px" }}>Idle</StyleTableCell>
-      <StyleTableCell sx={{ width: "306px" }}>12</StyleTableCell>
+      <StyleTableCell sx={{ width: "29px" }}>{index+1}</StyleTableCell>
+      <StyleTableCell sx={{ width: "181px" }}>{product.title}</StyleTableCell>
+      <StyleTableCell sx={{ width: "712px" }}>{product.description}</StyleTableCell>
+      <StyleTableCell sx={{ width: "30px" }}>{product.price}</StyleTableCell>
+      <StyleTableCell sx={{ width: "30px" }}>{product.stock}</StyleTableCell>
+
       <StyleTableCell sx={{ width: "133px" }}>
-        <img src={SwitchOff} />
+        {product.status?<img src={SwitchOff}/>:<img src={SwitchOn}/>}
       </StyleTableCell>
       <StyleTableCell
         style={{
@@ -26,6 +36,7 @@ function TableDetail() {
       >
         View
       </StyleTableCell>
+
       <StyleTableCell
         sx={{ width: "15px", paddingLeft: "0" }}
         style={{
@@ -39,7 +50,7 @@ function TableDetail() {
       <StyleTableCell
         sx={{ width: "47px" }}
         style={{
-          color: "#7C7B7B;",
+          color: "#7C7B7B",
         }}
       >
         DELETE
