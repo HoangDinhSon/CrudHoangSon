@@ -3,6 +3,8 @@ import Program from "./Program";
 import Search from "./Search";
 import { TableData } from "./TableDatas";
 import { Footer } from "./Footer";
+import { FormDelete, FormEdit } from "./FormNotify";
+
 // export {default as  Program } from "./Program";
 // export {default as  Search } from "./Search";
 function Programs(props: any) {
@@ -10,6 +12,12 @@ function Programs(props: any) {
   const listProducts = props.listProducts;
   const valuePageNumber = props.valuePageNumber;
   const valueRowPerPage = props.valueRowPerPage;
+  const displayFromDelete = props.displayFromDelete;
+  const hiddenFormDelete = props.hiddenFormDelete;
+  const isDisplayFormDelete = props.isDisplayFormDelete;
+  const deletePoduct = props.deletePoduct;
+  const isDisplayEditForm = props.isDisplayEditForm;
+  const displayEditForm = props.displayEditForm;
   //ra
   const pageNumber = props.pageNumber;
   const rowPerPage = props.rowPerPage;
@@ -19,11 +27,24 @@ function Programs(props: any) {
       <Program />
       <Search />
       <TableData
+        displayFromDelete={displayFromDelete}
         listProducts={listProducts}
         valuePageNumber={valuePageNumber}
         valueRowPerPage={valueRowPerPage}
+        displayEditForm={displayEditForm} 
       />
-      <Footer pageNumber={pageNumber} rowPerPage={rowPerPage} />
+      <Footer
+        pageNumber={pageNumber}
+        rowPerPage={rowPerPage}
+        listProducts={listProducts}
+      />
+      {isDisplayFormDelete && (
+        <FormDelete
+          hiddenFormDelete={hiddenFormDelete}
+          deletePoduct={deletePoduct}
+        />
+      )}
+      {isDisplayEditForm && <FormEdit />}
     </Fragment>
   );
 }

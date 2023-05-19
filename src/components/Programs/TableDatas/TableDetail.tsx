@@ -8,6 +8,14 @@ import { StyledTableRow, StyleTableCell } from "./tabbleCSS";
 function TableDetail(props:any) {
   const product =props.product;
   const index= props.index;
+  const displayFromDelete=props.displayFromDelete;
+  const displayEditForm=props.displayEditForm;
+  const handleDelete =( id:number )=>{
+    displayFromDelete(id);
+  }
+  const handleEdit= (id:number)=>{
+    displayEditForm(id)
+  }
 
   
   
@@ -43,6 +51,7 @@ function TableDetail(props:any) {
           color: "#004744",
           fontWeight: "500",
         }}
+        onClick = {()=>{handleEdit( product.id)}}
       >
         EDIT
       </StyleTableCell>
@@ -52,6 +61,7 @@ function TableDetail(props:any) {
         style={{
           color: "#7C7B7B",
         }}
+        onClick= {(e:any)=>handleDelete(  product.id)}
       >
         DELETE
       </StyleTableCell>

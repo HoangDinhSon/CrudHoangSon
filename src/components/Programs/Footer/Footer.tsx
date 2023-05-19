@@ -16,6 +16,7 @@ function Footer(props:any) {
   const [pageNumberPagination , setPageNumber]= useState(1);
   const pageNumber= props.pageNumber;
   const rowPerPage= props.rowPerPage;
+  const listProducts=props.listProducts;
 
   const handleSelectInput = (e: any, value: any) => {
     setPerRowPage(e.target.value);
@@ -101,7 +102,7 @@ function Footer(props:any) {
                 fontSize: "12px",
               }}
               // variant="outlined"
-              count={3} // kiểm tra giá trị
+              count={Math.ceil(listProducts.length/perRowPage)} // kiểm tra giá trị
               shape="rounded"
               onChange ={handlePageNumber}
             />

@@ -8,7 +8,6 @@ import {
 } from "@tanstack/react-query";
 const queyryClient = new QueryClient();
 
-
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <QueryClientProvider client={queyryClient}>

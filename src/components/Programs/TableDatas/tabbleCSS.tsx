@@ -5,7 +5,7 @@ import {
 } from "@mui/material";
 import { tableCellClasses } from "@mui/material/TableCell";
 
-const StyleTableCell = styled(TableCell)(({ theme }) => ({
+const StyleTableCell :any = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: "#EFEFEF",
     color: theme.palette.common.black,

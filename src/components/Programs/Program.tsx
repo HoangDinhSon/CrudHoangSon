@@ -4,7 +4,7 @@ import peopleVector2 from "../../assets/headerIconUser/Peoples/peopleVector2.svg
 import HeaderIconBar from "../../assets/HeaderIconBar.svg";
 
 
-function Program(props:any){
+function Program(){
   return (
     <div className="Wrap font-[Exo]">
       <div className="w-full h-[50] bg-[#E5E5E5] flex justify-between ">

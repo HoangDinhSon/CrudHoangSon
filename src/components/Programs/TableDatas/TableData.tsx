@@ -13,6 +13,9 @@ function TableData(props: any) {
   const listProducts = props.listProducts;
   const valuePageNumber = props.valuePageNumber;
   const valueRowPerPage = props.valueRowPerPage;
+  const displayFromDelete = props.displayFromDelete;
+  const displayEditForm=props.displayEditForm;
+  
 
   //ra
   const pageNumber = props.pageNumber;
@@ -43,8 +46,8 @@ function TableData(props: any) {
           <TableBody>
             {listProducts
               .slice(
-                (valuePageNumber - 1) * valueRowPerPage + 1,
-                (valuePageNumber - 1) * valueRowPerPage + 1 + valueRowPerPage
+                (valuePageNumber - 1) * valueRowPerPage ,
+                (valuePageNumber - 1) * valueRowPerPage  + valueRowPerPage
               )
               .map((product: any, index: number) => {
                 return (
@@ -52,10 +55,11 @@ function TableData(props: any) {
                     key={product.id}
                     product={product}
                     index={index}
+                    displayFromDelete={displayFromDelete}
+                    displayEditForm={displayEditForm}
                   />
                 );
               })}
-            <div className="w-full h-[76px]" ></div>
           </TableBody>
         </Table>
       </TableContainer>
