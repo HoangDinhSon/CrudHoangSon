@@ -1,28 +1,4 @@
 
-.MuiPagination-ul li {
-    height:38px ;
-    border: 1px solid #D9D9D9;   
-   
-}
-/* .css-10w330c-MuiButtonBase-root-MuiPaginationItem-root{
-  font-family: "Exo";
-  font-size: 10px;
-} */
-.css-10w330c-MuiButtonBase-root-MuiPaginationItem-root {
-  font-family: "Exo";
-  font-size: 10px;
-}
-.MuiPagination-ul li button {
-  border-width: 0;
-  border-radius: 0;
-  background-color: white;
-}
 
-.MuiPagination-ul li:first-child svg{
-    visibility: hidden;  
-}
-.MuiPaginationItem-previousNext{
-  background-color: aqua;
-}
 
 

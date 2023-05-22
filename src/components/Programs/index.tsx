@@ -3,10 +3,8 @@ import Program from "./Program";
 import Search from "./Search";
 import { TableData } from "./TableDatas";
 import { Footer } from "./Footer";
-import { FormDelete, FormEdit } from "./FormNotify";
+import { FormDelete, FormEdit, FormAddProduct } from "./FormNotify";
 
-// export {default as  Program } from "./Program";
-// export {default as  Search } from "./Search";
 function Programs(props: any) {
   //vào
   const listProducts = props.listProducts;
@@ -18,6 +16,14 @@ function Programs(props: any) {
   const deletePoduct = props.deletePoduct;
   const isDisplayEditForm = props.isDisplayEditForm;
   const displayEditForm = props.displayEditForm;
+  const hiddenEditForm = props.hiddenEditForm;
+  const productForEdit = props.productForEdit;
+  const getProductAfterEdit = props.getProductAfterEdit;
+  const isDisplayAddForm = props.isDisplayAddForm;
+  const displayAddForm = props.displayAddForm;
+  const hiddentAddForm = props.hiddentAddForm;
+  const getPayLoadFromAddForm=props.getPayLoadFromAddForm;
+  const handlePagination=props.handlePagination;
   //ra
   const pageNumber = props.pageNumber;
   const rowPerPage = props.rowPerPage;
@@ -25,18 +31,20 @@ function Programs(props: any) {
   return (
     <Fragment>
       <Program />
-      <Search />
+      <Search displayAddForm={displayAddForm}  />
       <TableData
         displayFromDelete={displayFromDelete}
         listProducts={listProducts}
         valuePageNumber={valuePageNumber}
         valueRowPerPage={valueRowPerPage}
-        displayEditForm={displayEditForm} 
+        displayEditForm={displayEditForm}
+       
       />
       <Footer
         pageNumber={pageNumber}
         rowPerPage={rowPerPage}
         listProducts={listProducts}
+        handlePagination={handlePagination}
       />
       {isDisplayFormDelete && (
         <FormDelete
@@ -44,7 +52,17 @@ function Programs(props: any) {
           deletePoduct={deletePoduct}
         />
       )}
-      {isDisplayEditForm && <FormEdit />}
+      {isDisplayEditForm && (
+        <FormEdit
+          hiddenEditForm={hiddenEditForm}
+          productForEdit={productForEdit}
+          getProductAfterEdit={getProductAfterEdit}
+        />
+      )}
+      {isDisplayAddForm && <FormAddProduct 
+      getPayLoadFromAddForm={getPayLoadFromAddForm}
+      hiddentAddForm={hiddentAddForm}
+       />}
     </Fragment>
   );
 }

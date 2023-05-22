@@ -2,7 +2,11 @@ import fillIcon from "../../assets/fillIcon.svg";
 import searchIconbody from "../../assets/searchIcon/searchIconbody.svg";
 import searchIconheader from "../../assets/searchIcon/searchIconheader.svg";
 import { Button, OutlinedInput } from "@mui/material";
-function Search() {
+function Search(props: any) {
+  const displayAddForm = props.displayAddForm;
+  const handleAddForm = () => {
+    displayAddForm();
+  };
   return (
     <div className="Wrap h-[70px] py-[19px] px-[15px]  flex justify-between font-[Exo]">
       <div className="search w-[400px] h-8 flex items-center">
@@ -57,6 +61,7 @@ function Search() {
             fontFamily: "Exo",
             color: "white",
           }}
+          onClick={handleAddForm}
         >
           + Add Station
         </Button>

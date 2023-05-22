@@ -1,36 +1,33 @@
 import { Button } from "@mui/material";
 import { TextField, Box, Select, MenuItem } from "@mui/material";
 import { useForm } from "react-hook-form";
-import { InputEditForm } from "../../../type";
-import {resolverForEditForm} from "../../../yupGlobal";
-function FormEdit(props: any) {
+import { InputAddForm } from "../../../type";
+import {resolverForAddForm} from "../../../yupGlobal";
+function FormAddProduct(props: any) {
+    const hiddentAddForm = props.hiddentAddForm;
+    const getPayLoadFromAddForm=props.getPayLoadFromAddForm;
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm<InputEditForm>();
+  } = useForm<InputAddForm>(resolverForAddForm);
 
-  const hiddenEditForm = props.hiddenEditForm;
-  const productForEdit = props.productForEdit;
-  const getProductAfterEdit = props.getProductAfterEdit;
-  
-
-  const handleCancel = () => {
-    hiddenEditForm();
+  const onSubmit = (payloadAddForm:InputAddForm) => {
+    getPayLoadFromAddForm(payloadAddForm)
+    
+    hiddentAddForm()
   };
-  const onSubmit = (data: any) => {
-    hiddenEditForm();
-    getProductAfterEdit({...data ,status:(data.status=="1")?true:false});
+  const handleCancel = () => {
+    hiddentAddForm()
   };
 
   return (
     <div className="wrap w-screen h-screen">
-      <div className="w-[448px] h-[500px]  fixed bottom-[50%] left-[50%] -translate-x-[50%] translate-y-[50%]  pl-[30px] pr-[30px] bg-slate-400 rounded-2xl">
+      <div className="w-[448px] h-[500px]  fixed bottom-[50%] left-[50%] -translate-x-[50%] translate-y-[50%]  pl-[30px] pr-[30px] bg-white rounded-2xl">
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="h-[50px] flex items-center justify-between">
-            <h1>Edit Production</h1>
-
+            <h1>ADD Production</h1>
             <div>
               <Button
                 sx={{
@@ -71,38 +68,33 @@ function FormEdit(props: any) {
             >
               <h1>Title</h1>
               <TextField
-                {...register("title")}
+                {...register("title" , {
+                    required: true 
+                })}
                 name="title"
-                defaultValue={productForEdit.title}
+                placeholder="title"
                 fullWidth
               />
+              {errors.title&&<p>invalidation</p>}
               <h1>Description</h1>
               <TextField
                 {...register("description")}
-                defaultValue={productForEdit.description}
+                placeholder="Description"
                 fullWidth
               />
+               {errors.description&&<p>invalidation</p>}
               <h1>Price</h1>
-              <TextField
-                {...register("price")}
-                defaultValue={productForEdit.price}
-                fullWidth
-              />
+              <TextField {...register("price")} placeholder="Price" fullWidth />
+              {errors.price&&<p>invalidation</p>}
               <h1>Stock</h1>
-              <TextField
-                {...register("stock")}
-                defaultValue={productForEdit.stock}
-                fullWidth
-              />
+              <TextField {...register("stock")} placeholder="Stock" fullWidth />
+              {errors.stock&&<p>invalidation</p>}
               <h1>Status</h1>
-              <Select
-                fullWidth
-                defaultValue={productForEdit.status ? 1 :0}
-                {...register("status")}
-              >
-                <MenuItem value={1}>On</MenuItem>
+              <Select fullWidth defaultValue={0} {...register("status")}>
+                <MenuItem value={1} >On</MenuItem>
                 <MenuItem value={0}>Off</MenuItem>
               </Select>
+              {errors.status&&<p>invalidation</p>}
             </Box>
           </div>
         </form>
@@ -111,4 +103,4 @@ function FormEdit(props: any) {
   );
 }
 
-export default FormEdit;
+export default FormAddProduct;

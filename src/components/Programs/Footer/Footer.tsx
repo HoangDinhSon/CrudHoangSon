@@ -1,34 +1,38 @@
 // import {makeStyles} from "@material-ui/core/styles";
 
-import { Pagination  } from "@mui/material";
+import { Pagination } from "@mui/material";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import ArrowBackRoundedIcon from "@mui/icons-material/ArrowBackRounded";
 // dùng type khác với interface chỗ nào nhỉ
 import "./StylesFooter.css";
 
-
-function Footer(props:any) {
+function Footer(props: any) {
   const [perRowPage, setPerRowPage] = useState(10);
-  const [pageNumberPagination , setPageNumber]= useState(1);
-  const pageNumber= props.pageNumber;
-  const rowPerPage= props.rowPerPage;
-  const listProducts=props.listProducts;
+  const [pageNumberPagination, setPageNumberPagination] = useState(1);
+
+  const pageNumber = props.pageNumber;
+  const rowPerPage = props.rowPerPage;
+  const listProducts = props.listProducts;
+  const handlePagination = props.handlePagination;
 
   const handleSelectInput = (e: any, value: any) => {
     setPerRowPage(e.target.value);
-    rowPerPage(e.target.value)
+    setPageNumberPagination(1);
+    // rowPerPage(e.target.value);
   };
- const  handlePageNumber =(e:any, value:any)=>{
-    setPageNumber( value);
-    pageNumber(value)
-    
- }
-
- 
+  const handlePageNumber = (e: any, value: any) => {
+    setPageNumberPagination(value);
+    // pageNumber(value);
+  };
+  useEffect(() => {
+    handlePagination(perRowPage, pageNumberPagination);
+    rowPerPage(perRowPage);
+    pageNumber(pageNumberPagination);
+  }, [perRowPage, pageNumberPagination]);
 
   return (
     <div className="wrap w-full h-[76px] p-[15px] text-[#666666]  fixed bottom-0 flex justify-between items-center">
@@ -79,34 +83,16 @@ function Footer(props:any) {
           </FormControl>
         </div>
         <div className="NavigationPage h-[38px] ml-[15px] ">
-          <ThemeProvider
-            theme={createTheme({
-              components: {
-                MuiPaginationItem: {
-                  defaultProps: {
-                    components: {
-                      previous: ArrowBackRoundedIcon,
-                      next: ArrowBackRoundedIcon,
-                    },
-                  },
-                },
-              },
-            })}
-          >
-            <Pagination
-              sx={{
-                lineHeight: "38px",
-              }}
-              style={{
-                fontFamily: "Exo",
-                fontSize: "12px",
-              }}
-              // variant="outlined"
-              count={Math.ceil(listProducts.length/perRowPage)} // kiểm tra giá trị
-              shape="rounded"
-              onChange ={handlePageNumber}
-            />
-          </ThemeProvider>
+          <Pagination
+            style={{
+              fontFamily: "Exo",
+              fontSize: "12px",
+            }}
+            // variant="outlined"
+            count={Math.ceil(listProducts.length / perRowPage)} // kiểm tra giá trị
+            shape="rounded"
+            onChange={handlePageNumber}
+          />
         </div>
       </div>
     </div>
