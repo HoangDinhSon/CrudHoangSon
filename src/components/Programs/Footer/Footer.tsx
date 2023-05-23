@@ -21,12 +21,10 @@ function Footer(props: any) {
 
   const handleSelectInput = (e: any, value: any) => {
     setPerRowPage(e.target.value);
-    setPageNumberPagination(1);
-    // rowPerPage(e.target.value);
+    // setPageNumberPagination(1);
   };
   const handlePageNumber = (e: any, value: any) => {
     setPageNumberPagination(value);
-    // pageNumber(value);
   };
   useEffect(() => {
     handlePagination(perRowPage, pageNumberPagination);
@@ -35,7 +33,7 @@ function Footer(props: any) {
   }, [perRowPage, pageNumberPagination]);
 
   return (
-    <div className="wrap w-full h-[76px] p-[15px] text-[#666666]  fixed bottom-0 flex justify-between items-center">
+    <div className="wrap w-full h-[76px] p-[15px] z-5 text-[#666666]  fixed bottom-0 flex justify-between items-center">
       <div className="leftFooter text-[13px] ">
         <p>Showing 1 to 10 of 32,316 entries</p>
       </div>

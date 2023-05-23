@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { LinearProgress, Alert } from "@mui/material";
-import   toast  from "react-hot-toast";
 import Programs from "./components/Programs";
+import * as _ from "lodash";
 
 import { findIndex, clonelistProducts, cloneObj } from "./handle-logic";
 import {
@@ -13,18 +13,22 @@ import {
   ID_FOR_UPDATE,
   IS_DISPLAY_ADD_FORM,
   STATUS_FOR_NEW_PRODUCT,
+  SEARCH_KEY_WORD,
+  ID_AND_STATUS_fORMVIEW,
 } from "./const";
 import { InputEditForm, outputAddForm } from "./type";
 import logTimeApi from "./Api/logTimeApi";
-const notifyError = ()=> toast.error("this did not work");
 
 function App() {
   const [id, setId] = useState();
-
+  const [searchKeyWord, setSearchKeyWord] = useState(SEARCH_KEY_WORD);
   const [idForProductUpdate, setIDForProductUpdate] = useState(ID_FOR_UPDATE);
   const [statusForProduct, setStatusForProduct] = useState(false);
   const [statusForNewProduct, setStatusForNewProduct] = useState(
     STATUS_FOR_NEW_PRODUCT
+  );
+  const [idAndStatusForView, setIdAndStatusForView] = useState(
+    ID_AND_STATUS_fORMVIEW
   );
   // hiển thị data trên table
   const [valuePageNumber, setPageNumber] = useState(VALUE_PAGE_NUMBER);
@@ -39,19 +43,21 @@ function App() {
   const [productForEdit, setProductForEdit] = useState({});
   // hidden/diaplay Addform
   const [isDisplayAddForm, setIsDisplayAddForm] = useState(IS_DISPLAY_ADD_FORM);
-// get All 
+  // hiddent /display ViewForm
+  const [isDisplayVieForm, setIsDisPlayViewForm] = useState(false);
+  // get All
   const queryResponse = useQuery({
     queryKey: ["products"],
     queryFn: () => logTimeApi.getAll,
+    enabled: true,
   });
   const data = queryResponse.data;
   const statusQuery = queryResponse.status;
-   //get limit and Skip 
-   const queryGetLimitSkip =useMutation({
-      mutationFn: logTimeApi.getLimitAndSkip,
-      
-
-   })
+  //get limit and Skip
+  const queryGetLimitSkip = useQuery({
+    queryKey: ["products"],
+    queryFn: () => logTimeApi.getLimitAndSkip,
+  });
   const queryDeleteProcduct = useMutation({
     mutationFn: (id: any) => logTimeApi.delete(id),
     onSuccess: (res) => {
@@ -59,7 +65,6 @@ function App() {
       data.products.splice(index, 1);
     },
   });
- 
 
   const queryUpdateProcduct = useMutation({
     mutationFn: logTimeApi.updateByID,
@@ -75,8 +80,7 @@ function App() {
       }
     },
     onError: (error) => {
-      notifyError
-      console.log("check",error);
+      console.log("check", error);
     },
   });
   const queryAddProduct = useMutation({
@@ -90,7 +94,18 @@ function App() {
         id: dataFromAddResponse.id,
         status: statusForNewProduct,
       });
-      console.log(dataFromAddResponse);
+    },
+  });
+  // const newCloneData= _.cloneDeep(data.products)
+  const querySearchProduct = useQuery({
+    queryKey: ["search", searchKeyWord],
+    queryFn: () => logTimeApi.searchProduct(searchKeyWord),
+    onSuccess: (responseAfterSuccess) => {
+      if (searchKeyWord) {
+        data.products = responseAfterSuccess.products;
+      } else {
+        // window.location.reload();
+      }
     },
   });
 
@@ -138,6 +153,33 @@ function App() {
       stock: payload.stock,
     });
   };
+  // Search
+  const getDataFromSearch = (payloadSearch: any) => {
+    setSearchKeyWord(payloadSearch);
+    // console.log(querySearchProduct.data?.data.products);
+  };
+  // view Form
+  const displayAndPutDataForFormView = (
+    id: number,
+    status: boolean,
+    title: string,
+    price: number,
+    description: string,
+    stock: number
+  ) => {
+    setIdAndStatusForView({
+      id: id,
+      status: status,
+      title: title,
+      price:price,
+      description:description,
+      stock:stock,
+    });
+    setIsDisPlayViewForm(true);
+  };
+  const hiddenViewForm = () => {
+    setIsDisPlayViewForm(false);
+  };
 
   // kiểm tra định dạng .
 
@@ -147,12 +189,7 @@ function App() {
   const rowPerPage = (rowPerPage: number) => {
     setRowPerPage(rowPerPage);
   };
-  const handlePagination = (rowPerPage :number  , pageNumber: number )=>{
-    console.log("rowPerPage ", rowPerPage,"pageNumber", pageNumber);
-
-    
- }
- 
+  const handlePagination = (rowPerPage: number, pageNumber: number) => {};
 
   return (
     <div className="wrap">
@@ -179,6 +216,11 @@ function App() {
           hiddentAddForm={hiddentAddForm}
           getPayLoadFromAddForm={getPayLoadFromAddForm}
           handlePagination={handlePagination}
+          getDataFromSearch={getDataFromSearch}
+          displayAndPutDataForFormView={displayAndPutDataForFormView}
+          hiddenViewForm={hiddenViewForm}
+          isDisplayVieForm={isDisplayVieForm}
+          idAndStatusForView={idAndStatusForView}
         />
       )}
     </div>

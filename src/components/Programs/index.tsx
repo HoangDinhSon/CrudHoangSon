@@ -3,7 +3,7 @@ import Program from "./Program";
 import Search from "./Search";
 import { TableData } from "./TableDatas";
 import { Footer } from "./Footer";
-import { FormDelete, FormEdit, FormAddProduct } from "./FormNotify";
+import { FormDelete, FormEdit, FormAddProduct, FormView } from "./FormNotify";
 
 function Programs(props: any) {
   //vào
@@ -22,23 +22,31 @@ function Programs(props: any) {
   const isDisplayAddForm = props.isDisplayAddForm;
   const displayAddForm = props.displayAddForm;
   const hiddentAddForm = props.hiddentAddForm;
-  const getPayLoadFromAddForm=props.getPayLoadFromAddForm;
-  const handlePagination=props.handlePagination;
+  const getPayLoadFromAddForm = props.getPayLoadFromAddForm;
+  const handlePagination = props.handlePagination;
+  const getDataFromSearch = props.getDataFromSearch;
+  const displayAndPutDataForFormView = props.displayAndPutDataForFormView;
+  const hiddenViewForm = props.hiddenViewForm;
+  const isDisplayVieForm = props.isDisplayVieForm;
+  const idAndStatusForView=props.idAndStatusForView;
   //ra
   const pageNumber = props.pageNumber;
   const rowPerPage = props.rowPerPage;
 
   return (
-    <Fragment>
+    <div>
       <Program />
-      <Search displayAddForm={displayAddForm}  />
+      <Search
+        displayAddForm={displayAddForm}
+        getDataFromSearch={getDataFromSearch}
+      />
       <TableData
         displayFromDelete={displayFromDelete}
         listProducts={listProducts}
         valuePageNumber={valuePageNumber}
         valueRowPerPage={valueRowPerPage}
         displayEditForm={displayEditForm}
-       
+        displayAndPutDataForFormView={displayAndPutDataForFormView}
       />
       <Footer
         pageNumber={pageNumber}
@@ -59,11 +67,16 @@ function Programs(props: any) {
           getProductAfterEdit={getProductAfterEdit}
         />
       )}
-      {isDisplayAddForm && <FormAddProduct 
-      getPayLoadFromAddForm={getPayLoadFromAddForm}
-      hiddentAddForm={hiddentAddForm}
-       />}
-    </Fragment>
+      {isDisplayAddForm && (
+        <FormAddProduct
+          getPayLoadFromAddForm={getPayLoadFromAddForm}
+          hiddentAddForm={hiddentAddForm}
+        />
+      )}
+      {isDisplayVieForm && <FormView hiddenViewForm={hiddenViewForm} 
+      idAndStatusForView={idAndStatusForView}
+      />}
+    </div>
   );
 }
 

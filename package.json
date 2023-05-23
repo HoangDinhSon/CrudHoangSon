@@ -18,6 +18,7 @@
     "@tanstack/react-query": "^4.29.7",
     "axios": "^1.4.0",
     "devtools": "^8.10.4",
+    "lodash": "^4.17.21",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.43.9",
@@ -27,6 +28,7 @@
   },
   "devDependencies": {
     "@tanstack/eslint-plugin-query": "^4.29.4",
+    "@types/lodash": "^4.14.194",
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.11",
     "@typescript-eslint/eslint-plugin": "^5.57.1",

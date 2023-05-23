@@ -3,4 +3,8 @@
 @tailwind utilities;
 html{
     font-family: "Exo";
+    
+}
+body {
+    height: 100vh;
 }

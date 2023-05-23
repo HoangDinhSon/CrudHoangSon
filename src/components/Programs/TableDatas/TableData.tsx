@@ -15,6 +15,7 @@ function TableData(props: any) {
   const valueRowPerPage = props.valueRowPerPage;
   const displayFromDelete = props.displayFromDelete;
   const displayEditForm=props.displayEditForm;
+  const displayAndPutDataForFormView =props.displayAndPutDataForFormView;
   
 
   //ra
@@ -39,12 +40,11 @@ function TableData(props: any) {
               <StyleTableCell sx={{ width: "20px", paddingRight: "0" }}>
                 View
               </StyleTableCell>
-              <StyleTableCell sx={{ width: "20px" }}>{"sua"}</StyleTableCell>
+              <StyleTableCell sx={{ width: "20px" }}>{""}</StyleTableCell>
               <StyleTableCell sx={{ width: "" }}>{""}</StyleTableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            
             {listProducts
               .slice(
                 (valuePageNumber - 1) * valueRowPerPage ,
@@ -58,9 +58,17 @@ function TableData(props: any) {
                     index={index}
                     displayFromDelete={displayFromDelete}
                     displayEditForm={displayEditForm}
+                    displayAndPutDataForFormView={displayAndPutDataForFormView}
                   />
                 );
               })}
+              <TableRow 
+                sx={{
+                  height:"76px",
+                  width: "20px",
+                  paddingLeft: "20px",
+                  paddingRight: 0,
+                }}/>
           </TableBody>
         </Table>
       </TableContainer>

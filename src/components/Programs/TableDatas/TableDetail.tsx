@@ -7,6 +7,7 @@ function TableDetail(props: any) {
   const index = props.index;
   const displayFromDelete = props.displayFromDelete;
   const displayEditForm = props.displayEditForm;
+  const displayAndPutDataForFormView=props.displayAndPutDataForFormView;
   // console.log("product.status ",product.status );
   
   const handleDelete = (id: number) => {
@@ -15,6 +16,9 @@ function TableDetail(props: any) {
   const handleEdit = (id: number) => {
     displayEditForm(id,product.status);
   };
+  const handleViewForm =(id:number)=>{
+    displayAndPutDataForFormView(id ,product.status, product.title,product.price, product.description, product.stock)
+  }
   return (
     <StyledTableRow>
       <StyleTableCell sx={{ width: "29px" }}>{index + 1}</StyleTableCell>
@@ -38,6 +42,7 @@ function TableDetail(props: any) {
           paddingLeft: "20px",
           paddingRight: 0,
         }}
+        onClick={()=>{handleViewForm(product.id)}}
       >
         View
       </StyleTableCell>

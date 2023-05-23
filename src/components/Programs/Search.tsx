@@ -2,11 +2,24 @@ import fillIcon from "../../assets/fillIcon.svg";
 import searchIconbody from "../../assets/searchIcon/searchIconbody.svg";
 import searchIconheader from "../../assets/searchIcon/searchIconheader.svg";
 import { Button, OutlinedInput } from "@mui/material";
+import {useState} from "react"
 function Search(props: any) {
   const displayAddForm = props.displayAddForm;
+  const getDataFromSearch =props.getDataFromSearch;
+  const [searchInput , SetSearchInput]=useState("")
   const handleAddForm = () => {
     displayAddForm();
   };
+
+  //Input
+  const handleGetDataSearchBox=(e:any )=>{
+    // SetSearchInput(e.target.value);
+    getDataFromSearch(e.target.value)
+  }
+  const handleSenpayload =()=>{
+    // getDataFromSearch(searchInput)
+  }
+  
   return (
     <div className="Wrap h-[70px] py-[19px] px-[15px]  flex justify-between font-[Exo]">
       <div className="search w-[400px] h-8 flex items-center">
@@ -27,8 +40,12 @@ function Search(props: any) {
             size="small"
             className="h-[32px] w-[202px]"
             sx={{
+              paddingLeft:"16px",
               outline: "none",
+              fontFamily: "Exo",
+              fontSize: 12,
             }}
+            onChange={(e)=>{handleGetDataSearchBox(e)}}
           />
         </div>
 
@@ -36,18 +53,16 @@ function Search(props: any) {
           <Button
             className="h-[32px] w-[100px] "
             sx={{
-              height: 32,
               backgroundColor: "#EFEFEF",
               color: "black",
               fontFamily: "Exo",
-              lineHeight: 20,
               fontSize: 12,
             }}
+            onClick={handleSenpayload}
           >
             <img src={fillIcon} alt="" className=" mr-2" />
             Station
           </Button>
-          <img src="" alt="" />
         </div>
       </div>
 
