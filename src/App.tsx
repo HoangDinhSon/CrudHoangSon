@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { LinearProgress, Alert } from "@mui/material";
 import Programs from "./components/Programs";
-import * as _ from "lodash";
+import toast, { Toaster } from "react-hot-toast";
 
 import { findIndex, clonelistProducts, cloneObj } from "./handle-logic";
 import {
@@ -18,9 +18,9 @@ import {
 } from "./const";
 import { InputEditForm, outputAddForm } from "./type";
 import logTimeApi from "./Api/logTimeApi";
-
 function App() {
-  const [id, setId] = useState();
+  const [flagSearch, setFlagSearch] = useState(false);
+  const [idForDelete, setIdForDelete] = useState();
   const [searchKeyWord, setSearchKeyWord] = useState(SEARCH_KEY_WORD);
   const [idForProductUpdate, setIDForProductUpdate] = useState(ID_FOR_UPDATE);
   const [statusForProduct, setStatusForProduct] = useState(false);
@@ -49,7 +49,12 @@ function App() {
   const queryResponse = useQuery({
     queryKey: ["products"],
     queryFn: () => logTimeApi.getAll,
-    enabled: true,
+    onSuccess: () => {
+      toast.success("WellCome");
+    },
+    onError: () => {
+      toast.error("Something Wrong");
+    },
   });
   const data = queryResponse.data;
   const statusQuery = queryResponse.status;
@@ -63,12 +68,17 @@ function App() {
     onSuccess: (res) => {
       let index = findIndex(res.data.id, data.products);
       data.products.splice(index, 1);
+      toast.success("Delete complited");
+    },
+    onError: () => {
+      toast.error("!Delete, Something wrong you can't delete ");
     },
   });
 
   const queryUpdateProcduct = useMutation({
     mutationFn: logTimeApi.updateByID,
     onSuccess: (dataFrommutation) => {
+      toast.success("Update Complited");
       const idProductForUpdate = dataFrommutation.data.id;
       const index = findIndex(idProductForUpdate, data.products);
       if (index != undefined) {
@@ -79,13 +89,14 @@ function App() {
         data.products[index].status = statusForProduct;
       }
     },
-    onError: (error) => {
-      console.log("check", error);
+    onError: () => {
+      toast.error("SomeThing Wrong");
     },
   });
   const queryAddProduct = useMutation({
     mutationFn: logTimeApi.addNewProduct,
     onSuccess: (dataFromAddResponse) => {
+      toast.success("Add Product Complited");
       data.products.unshift({
         title: dataFromAddResponse.title,
         description: dataFromAddResponse.description,
@@ -95,30 +106,45 @@ function App() {
         status: statusForNewProduct,
       });
     },
+    onError: () => {
+      toast.error("SomeThing Wrong");
+    },
   });
-  // const newCloneData= _.cloneDeep(data.products)
+  //Search
   const querySearchProduct = useQuery({
     queryKey: ["search", searchKeyWord],
     queryFn: () => logTimeApi.searchProduct(searchKeyWord),
     onSuccess: (responseAfterSuccess) => {
+     
       if (searchKeyWord) {
+        setFlagSearch(true);
         data.products = responseAfterSuccess.products;
-      } else {
-        // window.location.reload();
       }
     },
+    onError: () => {
+     toast.error("Error")
+    },
   });
+  const queryGetAllProductForSearch = useQuery({
+    queryKey: ["getAllProduct"],
+    queryFn: () => logTimeApi.getAllProductsForSearch(),
+  });
+  useEffect(() => {
+    if (searchKeyWord.length == 0 && flagSearch) {
+      data.products = queryGetAllProductForSearch.data.products;
+    }
+  }, [searchKeyWord]);
 
   // hiển thị /ẩn / xóa  form Delete
   const displayFromDelete = (id: any) => {
-    setId(id);
+    setIdForDelete(id);
     setIsDisplayFormDelete(() => true);
   };
   const hiddenFormDelete = () => {
     setIsDisplayFormDelete(() => false);
   };
   const deletePoduct = () => {
-    queryDeleteProcduct.mutate(id);
+    queryDeleteProcduct.mutate(idForDelete);
   };
   // hiển thị form , editForm
   const displayEditForm = (id: number, status: boolean) => {
@@ -171,9 +197,9 @@ function App() {
       id: id,
       status: status,
       title: title,
-      price:price,
-      description:description,
-      stock:stock,
+      price: price,
+      description: description,
+      stock: stock,
     });
     setIsDisPlayViewForm(true);
   };
@@ -193,6 +219,7 @@ function App() {
 
   return (
     <div className="wrap">
+      <Toaster />
       {statusQuery === "loading" && <LinearProgress />}
       {statusQuery === "error" && <Alert>Disconnect Network</Alert>}
       {statusQuery === "success" && (

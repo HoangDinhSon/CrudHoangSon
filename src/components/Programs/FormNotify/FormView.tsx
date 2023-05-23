@@ -9,7 +9,7 @@ function FormView(props: any) {
     hiddenViewForm()
   };
   return (
-    <div className="wrap_Form_View   ">
+    <div className="wrap_form_view  ">
       <div className="w-screen h-[screen] bg-black opacity-10  fixed top-0 bottom-0 " ></div>
       <div className="w-[448px] h-[500px]  fixed bottom-[50%] left-[50%] -translate-x-[50%] translate-y-[50%]  pl-[30px] pr-[30px] bg-white rounded-2xl">
         <form >
@@ -19,11 +19,13 @@ function FormView(props: any) {
               <Button
                 sx={{
                   height: "26px",
+                  lineHeight:"26px",
                   width: "94px",
                   backgroundColor: "grey",
                   fontSize: "14px",
                   color: "#004744",
                   fontFamily: "Exo",
+                 ":hover" : { backgroundColor: "grey"}
                 }}
                 onClick={handleCancel}
               >

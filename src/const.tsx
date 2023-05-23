@@ -1,5 +1,5 @@
 const VALUE_PAGE_NUMBER: number = 1;
-const VALUE_ROW_PER_PAGE: number = 10;
+const VALUE_ROW_PER_PAGE: number = 5;
 const IS_DISPLAY_EDIT_fORM: boolean = false;
 const IS_DISPLAY_DELETE_FORM: boolean = false;
 const ID_FOR_UPDATE = 1;

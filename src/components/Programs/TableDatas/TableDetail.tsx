@@ -41,6 +41,7 @@ function TableDetail(props: any) {
           width: "20px",
           paddingLeft: "20px",
           paddingRight: 0,
+          cursor: "pointer",
         }}
         onClick={()=>{handleViewForm(product.id)}}
       >
@@ -48,7 +49,7 @@ function TableDetail(props: any) {
       </StyleTableCell>
 
       <StyleTableCell
-        sx={{ width: "15px", paddingLeft: "0" }}
+        sx={{ width: "15px", paddingLeft: "0",cursor: "pointer", }}
         style={{
           color: "#004744",
           fontWeight: "500",
@@ -61,7 +62,7 @@ function TableDetail(props: any) {
       </StyleTableCell>
 
       <StyleTableCell
-        sx={{ width: "47px" }}
+        sx={{ width: "47px" ,cursor: "pointer",}}
         style={{
           color: "#7C7B7B",
         }}

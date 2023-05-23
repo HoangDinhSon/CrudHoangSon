@@ -25,8 +25,9 @@ function FormEdit(props: any) {
   };
 
   return (
-    <div className="wrap w-screen h-screen">
-      <div className="w-[448px] h-[500px]  fixed bottom-[50%] left-[50%] -translate-x-[50%] translate-y-[50%]  pl-[30px] pr-[30px] bg-slate-400 rounded-2xl">
+    <div className="wrap_form_edit">
+      <div className="w-screen h-[screen] bg-black opacity-10  fixed top-0 bottom-0 " ></div>
+      <div className="w-[448px] h-[500px]  fixed bottom-[50%] left-[50%] -translate-x-[50%] translate-y-[50%]  pl-[30px] pr-[30px] bg-white rounded-2xl">
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="h-[50px] flex items-center justify-between">
             <h1>Edit Production</h1>

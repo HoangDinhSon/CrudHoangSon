@@ -5,13 +5,12 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import { useEffect, useState } from "react";
-import { ThemeProvider, createTheme } from "@mui/material/styles";
-import ArrowBackRoundedIcon from "@mui/icons-material/ArrowBackRounded";
+import {VALUE_ROW_PER_PAGE} from "../../../const"
 // dùng type khác với interface chỗ nào nhỉ
 import "./StylesFooter.css";
 
 function Footer(props: any) {
-  const [perRowPage, setPerRowPage] = useState(10);
+  const [perRowPage, setPerRowPage] = useState(VALUE_ROW_PER_PAGE);
   const [pageNumberPagination, setPageNumberPagination] = useState(1);
 
   const pageNumber = props.pageNumber;
@@ -55,9 +54,9 @@ function Footer(props: any) {
                   fontSize: "12px",
                   fontFamily: "Exo",
                 }}
-                value={10}
+                value={5}
               >
-                10 per page
+                5 per page
               </MenuItem>
               <MenuItem
                 sx={{
