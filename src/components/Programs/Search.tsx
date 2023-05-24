@@ -1,36 +1,40 @@
-import fillIcon from "../../assets/fillIcon.svg";
-import searchIconbody from "../../assets/searchIcon/searchIconbody.svg";
-import searchIconheader from "../../assets/searchIcon/searchIconheader.svg";
+import { Fill, MyIconSeachBody, MyIconSearchHeader } from "../../myIconMui";
 import { Button, OutlinedInput } from "@mui/material";
-import {useState} from "react"
 function Search(props: any) {
   const displayAddForm = props.displayAddForm;
-  const getDataFromSearch =props.getDataFromSearch;
-  const [searchInput , SetSearchInput]=useState("")
+  const getDataFromSearch = props.getDataFromSearch;
   const handleAddForm = () => {
     displayAddForm();
   };
-
   //Input
-  const handleGetDataSearchBox=(e:any )=>{
-    // SetSearchInput(e.target.value);
-    getDataFromSearch(e.target.value)
-  }
-  const handleSenpayload =()=>{
-    // getDataFromSearch(searchInput)
-  }
-  
+  const handleGetDataSearchBox = (e: any) => {
+    getDataFromSearch(e.target.value);
+  };
+ 
+
   return (
     <div className="Wrap h-[70px] py-[19px] px-[15px]  flex justify-between font-[Exo]">
       <div className="search w-[400px] h-8 flex items-center">
         <div className="relative">
           <div className=" absolute top-[50%] -translate-y-[50%] left-2 ">
             <div className="relative w-[15px] h-[15px]">
-              <img src={searchIconbody} alt="" />
-              <img
-                src={searchIconheader}
-                alt=""
-                className="absolute bottom-0 right-0"
+              <MyIconSeachBody
+                sx={{
+                  width: 14,
+                  height: 14,
+                  position: "absolute",
+                  bottom: 2,
+                  right: 2,
+                }}
+              />
+              <MyIconSearchHeader
+                sx={{
+                  width: 5,
+                  height: 5,
+                  position: "absolute",
+                  bottom: 1,
+                  right: 0,
+                }}
               />
             </div>
           </div>
@@ -40,12 +44,14 @@ function Search(props: any) {
             size="small"
             className="h-[32px] w-[202px]"
             sx={{
-              paddingLeft:"16px",
+              paddingLeft: "16px",
               outline: "none",
               fontFamily: "Exo",
               fontSize: 12,
             }}
-            onChange={(e)=>{handleGetDataSearchBox(e)}}
+            onChange={(e) => {
+              handleGetDataSearchBox(e);
+            }}
           />
         </div>
 
@@ -58,9 +64,13 @@ function Search(props: any) {
               fontFamily: "Exo",
               fontSize: 12,
             }}
-            onClick={handleSenpayload}
           >
-            <img src={fillIcon} alt="" className=" mr-2" />
+            <Fill
+              sx={{
+                marginRight: "2px",
+                height: "15px",
+              }}
+            />
             Station
           </Button>
         </div>
@@ -75,6 +85,9 @@ function Search(props: any) {
             backgroundColor: "#004744",
             fontFamily: "Exo",
             color: "white",
+            ":hover": {
+              backgroundColor: "#004744",
+            },
           }}
           onClick={handleAddForm}
         >

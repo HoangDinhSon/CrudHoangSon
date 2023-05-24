@@ -1,12 +1,11 @@
 // import {makeStyles} from "@material-ui/core/styles";
-
-import { Pagination } from "@mui/material";
+import { Pagination, PaginationItem } from "@mui/material";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
+import { createSvgIcon } from "@mui/material";
 import { useEffect, useState } from "react";
-import {VALUE_ROW_PER_PAGE} from "../../../const"
-// dùng type khác với interface chỗ nào nhỉ
+import { VALUE_ROW_PER_PAGE } from "../../../const";
 import "./StylesFooter.css";
 
 function Footer(props: any) {
@@ -20,7 +19,11 @@ function Footer(props: any) {
 
   const handleSelectInput = (e: any, value: any) => {
     setPerRowPage(e.target.value);
-    // setPageNumberPagination(1);
+    setPageNumberPagination(
+      Math.ceil(
+        (perRowPage * pageNumberPagination - perRowPage / 2) / e.target.value
+      )
+    );
   };
   const handlePageNumber = (e: any, value: any) => {
     setPageNumberPagination(value);
@@ -31,8 +34,18 @@ function Footer(props: any) {
     pageNumber(pageNumberPagination);
   }, [perRowPage, pageNumberPagination]);
 
+  useEffect(() => {
+    if (pageNumberPagination > Math.ceil(listProducts.length / perRowPage)) {
+      setPageNumberPagination(pageNumberPagination - 1);
+    }
+  }, [listProducts.length]);
+  const next = createSvgIcon(
+    <path d="M0 0h24v24H0V0z" fill="none"/>,
+    "next"
+  );
+
   return (
-    <div className="wrap w-full h-[76px] p-[15px] z-5 text-[#666666]  fixed bottom-0 flex justify-between items-center">
+    <div className="wrap w-full h-[50px] p-[15px] z-5 text-[#666666]  fixed bottom-0 flex justify-between items-center">
       <div className="leftFooter text-[13px] ">
         <p>Showing 1 to 10 of 32,316 entries</p>
       </div>
@@ -81,14 +94,45 @@ function Footer(props: any) {
         </div>
         <div className="NavigationPage h-[38px] ml-[15px] ">
           <Pagination
+            renderItem={(item) => (
+              <PaginationItem
+                sx={{
+                  fontFamily: "Exo",
+                  fontSize: "12px",
+                  height: "36px",
+                  borderWidth: "1px",
+                  borderStyle: "solid",
+                  borderColor: "#D9D9D9",
+                  margin: "0",
+                  borderRadius: 0,
+                  color: "black",
+                  borderLeftWidth: 0,
+                  borderBottomWidth: 0,
+                  borderTopWidth: 0,
+                  ":focus": {
+                    backgroundColor: "#004744",
+                    color: "white",
+                  },
+                }}
+                components={{
+                  // previous:next,
+                  // next:"Next",
+                }}
+                {...item}
+              />
+            )}
             style={{
               fontFamily: "Exo",
               fontSize: "12px",
+              height: "38px",
+              borderWidth: "1px",
+              borderColor: "#D9D9D9",
             }}
             // variant="outlined"
             count={Math.ceil(listProducts.length / perRowPage)} // kiểm tra giá trị
             shape="rounded"
             onChange={handlePageNumber}
+            page={pageNumberPagination}
           />
         </div>
       </div>

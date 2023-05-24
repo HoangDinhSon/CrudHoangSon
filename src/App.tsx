@@ -3,6 +3,7 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { LinearProgress, Alert } from "@mui/material";
 import Programs from "./components/Programs";
 import toast, { Toaster } from "react-hot-toast";
+const port = import.meta.env.VITE_PORT;
 
 import { findIndex, clonelistProducts, cloneObj } from "./handle-logic";
 import {
@@ -20,8 +21,8 @@ import { InputEditForm, outputAddForm } from "./type";
 import logTimeApi from "./Api/logTimeApi";
 function App() {
   const [flagSearch, setFlagSearch] = useState(false);
-  const [idForDelete, setIdForDelete] = useState();
   const [searchKeyWord, setSearchKeyWord] = useState(SEARCH_KEY_WORD);
+  const [idForDelete, setIdForDelete] = useState();
   const [idForProductUpdate, setIDForProductUpdate] = useState(ID_FOR_UPDATE);
   const [statusForProduct, setStatusForProduct] = useState(false);
   const [statusForNewProduct, setStatusForNewProduct] = useState(
@@ -50,10 +51,8 @@ function App() {
     queryKey: ["products"],
     queryFn: () => logTimeApi.getAll,
     onSuccess: () => {
-      toast.success("WellCome");
     },
     onError: () => {
-      toast.error("Something Wrong");
     },
   });
   const data = queryResponse.data;
@@ -71,7 +70,7 @@ function App() {
       toast.success("Delete complited");
     },
     onError: () => {
-      toast.error("!Delete, Something wrong you can't delete ");
+      toast.error("Something wrong you can't delete ");
     },
   });
 
@@ -208,7 +207,7 @@ function App() {
   };
 
   // kiểm tra định dạng .
-
+  //lấy pageNumber và rowperpage 
   const pageNumber = (pageNumber: number) => {
     setPageNumber(pageNumber);
   };
@@ -216,6 +215,10 @@ function App() {
     setRowPerPage(rowPerPage);
   };
   const handlePagination = (rowPerPage: number, pageNumber: number) => {};
+
+
+  console.log("port",typeof port);
+  
 
   return (
     <div className="wrap">

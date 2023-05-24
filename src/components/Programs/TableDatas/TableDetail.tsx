@@ -1,4 +1,4 @@
-import SwitchOff from "../../../assets/Switch.svg";
+import {MyIconSwitchOff,MyIconSwitchOn} from "../../../myIconMui"
 import SwitchOn from "../../../assets/SwitchOn.svg";
 import { StyledTableRow, StyleTableCell } from "./tabbleCSS";
 
@@ -30,7 +30,7 @@ function TableDetail(props: any) {
       <StyleTableCell sx={{ width: "30px" }}>{product.stock}</StyleTableCell>
 
       <StyleTableCell sx={{ width: "133px" }}>
-        {product.status ? <img src={SwitchOn} /> : <img src={SwitchOff} />}
+        {product.status ? <MyIconSwitchOn/> : <MyIconSwitchOff/>}
       </StyleTableCell>
       <StyleTableCell
         style={{

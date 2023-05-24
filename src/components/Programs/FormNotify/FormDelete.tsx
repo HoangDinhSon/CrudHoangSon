@@ -30,6 +30,9 @@ function FormDelete(props: any) {
                 fontSize: "14px",
                 color: "#004744",
                 fontFamily: "Exo",
+                ":hover":{
+                  backgroundColor: "grey"
+                }
               }}
               onClick={handleDelete}
             >
@@ -44,6 +47,9 @@ function FormDelete(props: any) {
                 fontSize: "14px",
                 color: "white",
                 marginLeft: "10px",
+                ":hover":{
+                  backgroundColor: "#004744"
+                }
               }}
               onClick={handleConfirm}
             >
