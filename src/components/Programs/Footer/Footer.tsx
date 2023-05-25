@@ -6,7 +6,6 @@ import MenuItem from "@mui/material/MenuItem";
 import { createSvgIcon } from "@mui/material";
 import { useEffect, useState } from "react";
 import { VALUE_ROW_PER_PAGE } from "../../../const";
-import "./StylesFooter.css";
 
 function Footer(props: any) {
   const [perRowPage, setPerRowPage] = useState(VALUE_ROW_PER_PAGE);
@@ -39,18 +38,14 @@ function Footer(props: any) {
       setPageNumberPagination(pageNumberPagination - 1);
     }
   }, [listProducts.length]);
-  const next = createSvgIcon(
-    <path d="M0 0h24v24H0V0z" fill="none"/>,
-    "next"
-  );
 
   return (
-    <div className="wrap w-full h-[50px] p-[15px] z-5 text-[#666666]  fixed bottom-0 flex justify-between items-center">
-      <div className="leftFooter text-[13px] ">
+    <div className="wrap w-full h-[50px] p-[15px] z-5 text-[#666666]  fixed bottom-0 flex justify-between items-center mobile:fixed mobile:bottom-0 mobile:justify-center mobile:p-0">
+      <div className="leftFooter text-[13px] mobile:hidden">
         <p>Showing 1 to 10 of 32,316 entries</p>
       </div>
       <div className="rightFooter text-[12px] flex justify-end items-center">
-        <div className="rowPerPage">
+        <div className="rowPerPage  ">
           <FormControl>
             <Select
               sx={{
@@ -92,7 +87,7 @@ function Footer(props: any) {
             </Select>
           </FormControl>
         </div>
-        <div className="NavigationPage h-[38px] ml-[15px] ">
+        <div className="NavigationPage h-[38px] ml-[15px] mobile:m-0 ">
           <Pagination
             renderItem={(item) => (
               <PaginationItem
@@ -114,10 +109,12 @@ function Footer(props: any) {
                     color: "white",
                   },
                 }}
-                components={{
-                  // previous:next,
-                  // next:"Next",
-                }}
+                components={
+                  {
+                    // previous:next,
+                    // next:"Next",
+                  }
+                }
                 {...item}
               />
             )}

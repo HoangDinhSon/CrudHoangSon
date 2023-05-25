@@ -50,7 +50,7 @@ const YourIcon = (props: SvgIconProps) => {
           width="92"
           height="92"
           filterUnits="userSpaceOnUse"
-          colorInterpolation-filters="sRGB"
+          colorInterpolationFilters="sRGB"
         >
           <feFlood floodOpacity="0" result="BackgroundImageFix"></feFlood>
           <feColorMatrix

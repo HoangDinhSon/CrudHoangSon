@@ -12,9 +12,9 @@ function FormDelete(props: any) {
     hiddenFormDelete();
   };
   return (
-    <div className="wrap_form_delete w-screen h-scrren  bg-slate-400">
+    <div className="wrap_form_delete w-screen h-scrren  bg-slate-400 ">
       <div className="w-screen h-[screen] bg-black opacity-10  fixed top-0 bottom-0 " ></div>
-      <div className="wrap  w-[378px] h-[190px] pt-[41px] pl-[34px] pb-[32px] pr-[30px] fixed bottom-[50%] left-[50%] bg-white -translate-x-[50%] translate-y-[50%] ">
+      <div className="wrap  w-[378px] h-[190px] pt-[41px] pl-[34px] pb-[32px] pr-[30px] fixed bottom-[50%] left-[50%] bg-white -translate-x-[50%] translate-y-[50%] mobile:p-3 ">
         <div className=" ">
           <h1 className="text-[20px]">Delete Station?</h1>
           <p className="text-[12px] mb-[24px]">

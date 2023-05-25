@@ -1,3 +1,4 @@
+import {useState , useEffect} from "react";
 const findIndex = (id: any, arrayObject: []) => {
   let indexcurrent;
   arrayObject.map((procduct: any, index: number) => {
@@ -58,4 +59,17 @@ const cloneObj = (obj: any): typeObject => {
   return newObject;
 };
 
-export { findIndex, clonelistProducts, cloneObj, };
+// get viewPort from trình duyệt 
+
+const useViewport = () => {
+  const [width, setWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleWindowResize = () => setWidth(window.innerWidth);
+    window.addEventListener("resize", handleWindowResize);
+    return () => window.removeEventListener("resize", handleWindowResize);
+  }, []);
+
+  return { width };
+};
+export { findIndex, clonelistProducts, cloneObj,useViewport };

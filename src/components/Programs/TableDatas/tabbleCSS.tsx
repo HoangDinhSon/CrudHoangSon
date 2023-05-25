@@ -1,44 +1,40 @@
-import {
-  TableRow,
-  TableCell,
-  styled,
-} from "@mui/material";
+import { TableRow, TableCell, styled } from "@mui/material";
 import { tableCellClasses } from "@mui/material/TableCell";
 
-const StyleTableCell :any = styled(TableCell)(({ theme }) => ({
+// style for table Cell
+const StyleTableCell: any = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: "#EFEFEF",
     color: theme.palette.common.black,
-    padding: "14px 18px ",
-    lineHeight:"100%",
-    boxSizing: "border-box",
-    fontSize:"12px",
-    fontFamily:"Exo",
-    fontWeight:"bold",
-
+    padding: "14px 4px",
+    lineHeight: "100%",
+    fontWeight: "bold",
   },
   [`&.${tableCellClasses.body}`]: {
+    padding:"14px 4px ",
    
   },
   [`&.${tableCellClasses.root}`]: {
-    fontFamily:"Exo",
-    color:"#181818"
+    fontFamily: "Exo",
+    color: "#181818",
+    fontSize: "12px",
+    boxSizing: "border-box",
   },
 }));
-
+// style for table row
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
-  
-   
   "&:nth-of-type(even)": {
     backgroundColor: theme.palette.action.hover,
-    padding:"8px",
+    padding: "5px",
+  },
+  "&:nth-of-type(odd)": {
+    // backgroundColor: theme.palette.action.hover,
+    padding: "5px",
   },
   // hide last border
   "&:last-child td, &:last-child th": {
     border: 0,
   },
-
 }));
 
-
-export {StyleTableCell, StyledTableRow }
+export { StyleTableCell, StyledTableRow };

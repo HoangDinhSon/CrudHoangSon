@@ -14,24 +14,33 @@ function TableData(props: any) {
   const valuePageNumber = props.valuePageNumber;
   const valueRowPerPage = props.valueRowPerPage;
   const displayFromDelete = props.displayFromDelete;
-  const displayEditForm=props.displayEditForm;
-  const displayAndPutDataForFormView =props.displayAndPutDataForFormView;
-  
+  const displayEditForm = props.displayEditForm;
+  const displayAndPutDataForFormView = props.displayAndPutDataForFormView;
 
   //ra
   const pageNumber = props.pageNumber;
   const rowPerPage = props.rowPerPage;
-  //
+
+  //Responsive
 
   return (
-    <div className="Wrap">
+    <div className="Wrap w-screen">
       <TableContainer>
         <Table>
           <TableHead>
             <TableRow>
               <StyleTableCell sx={{ width: "29px" }}>STT</StyleTableCell>
               <StyleTableCell sx={{ width: "181px" }}>Title</StyleTableCell>
-              <StyleTableCell sx={{ width: "306px" }}>
+              <StyleTableCell
+                sx={{
+                  width: "306px",
+                  display: {
+                    xs: "none",
+                    sm: "table-cell",
+                  },
+                }}
+                className="res_des"
+              >
                 Description
               </StyleTableCell>
               <StyleTableCell sx={{ width: "306px" }}>Price </StyleTableCell>
@@ -47,8 +56,8 @@ function TableData(props: any) {
           <TableBody>
             {listProducts
               .slice(
-                (valuePageNumber - 1) * valueRowPerPage ,
-                (valuePageNumber - 1) * valueRowPerPage  + valueRowPerPage
+                (valuePageNumber - 1) * valueRowPerPage,
+                (valuePageNumber - 1) * valueRowPerPage + valueRowPerPage
               )
               .map((product: any, index: number) => {
                 return (
@@ -62,13 +71,14 @@ function TableData(props: any) {
                   />
                 );
               })}
-              <TableRow 
-                sx={{
-                  height:"76px",
-                  width: "20px",
-                  paddingLeft: "20px",
-                  paddingRight: 0,
-                }}/>
+            <TableRow
+              sx={{
+                height: "76px",
+                width: "20px",
+                paddingLeft: "20px",
+                paddingRight: 0,
+              }}
+            />
           </TableBody>
         </Table>
       </TableContainer>

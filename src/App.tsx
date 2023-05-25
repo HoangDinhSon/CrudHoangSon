@@ -217,7 +217,6 @@ function App() {
   const handlePagination = (rowPerPage: number, pageNumber: number) => {};
 
 
-  console.log("port",typeof port);
   
 
   return (

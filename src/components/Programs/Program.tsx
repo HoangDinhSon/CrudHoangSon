@@ -45,7 +45,6 @@ function Program() {
                   height: 8,
                 }}
               />
-              {/* <img src={peopleVector} alt="" /> */}
             </div>
           </div>
         </div>

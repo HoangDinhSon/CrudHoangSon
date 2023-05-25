@@ -8,10 +8,13 @@ function FormView(props: any) {
   const handleCancel = () => {
     hiddenViewForm()
   };
+  const handleHiddenWhenClickSpace=()=>{
+    hiddenViewForm()
+  }
   return (
     <div className="wrap_form_view  ">
-      <div className="w-screen h-[screen] bg-black opacity-10  fixed top-0 bottom-0 " ></div>
-      <div className="w-[448px] h-screen  fixed right-0 top-0 pl-[30px] pr-[30px] bg-white rounded-sm">
+      <div className="w-screen h-[screen] bg-black opacity-10  fixed top-0 bottom-0 " onClick = {handleHiddenWhenClickSpace}></div>
+      <div className="w-[448px] h-screen  fixed right-0 top-0 pl-[30px] pr-[30px] bg-white rounded-sm mobile:w-full">
         <form >
           <div className="h-[50px] flex items-center justify-between">
             <h1>View Production</h1>

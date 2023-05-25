@@ -15,7 +15,7 @@ function MyIconSwitchOff(props:any) {
         height="13.3333"
         rx="6.66667"
         fill="#044744"
-        fill-opacity="0.2"
+        fillOpacity="0.2"
       />
       <circle cx="6.66666" cy="6.66667" r="5" fill="white" />
     </SvgIcon>

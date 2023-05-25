@@ -30,6 +30,15 @@ const ID_AND_STATUS_fORMVIEW = {
    price:0,
    description:""
   }
+  // viewpoint 
+const  VIEW_PORT  ={
+  xs: 0,
+  sm: 376, // phone
+  md: 601,  // tablets
+  lg: 901, // small laptop
+  xl: 1201,// desktop
+} 
+
 export {
   VALUE_PAGE_NUMBER,
   VALUE_ROW_PER_PAGE,
@@ -41,4 +50,5 @@ export {
   SEARCH_KEY_WORD,
   DATA_RESPONSE_INITIAL,
   ID_AND_STATUS_fORMVIEW,
+  VIEW_PORT,
 };
