@@ -7,8 +7,7 @@ import { ThemeProvider, createTheme } from "@mui/material";
 import {VIEW_PORT} from "./const.tsx"
 const theme = createTheme({
   breakpoints: {
-    values: {
-      
+    values: {    
       xs: VIEW_PORT.xs, // phone
       sm:  VIEW_PORT.sm, // tablets
       md:  VIEW_PORT.md, // small laptop

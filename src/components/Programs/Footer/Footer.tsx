@@ -3,11 +3,14 @@ import { Pagination, PaginationItem } from "@mui/material";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
-import { createSvgIcon } from "@mui/material";
 import { useEffect, useState } from "react";
 import { VALUE_ROW_PER_PAGE } from "../../../const";
 
+import {getWidthScreen} from "../../../handle-logic";
+import {VIEW_PORT} from "../../../const";
+
 function Footer(props: any) {
+
   const [perRowPage, setPerRowPage] = useState(VALUE_ROW_PER_PAGE);
   const [pageNumberPagination, setPageNumberPagination] = useState(1);
 
@@ -38,6 +41,13 @@ function Footer(props: any) {
       setPageNumberPagination(pageNumberPagination - 1);
     }
   }, [listProducts.length]);
+  const viewPoint = getWidthScreen();
+  useEffect(()=>{
+    if (viewPoint<VIEW_PORT.sm){
+      setPerRowPage(20);
+    }
+  },[viewPoint]);
+
 
   return (
     <div className="wrap w-full h-[50px] p-[15px] z-5 text-[#666666]  fixed bottom-0 flex justify-between items-center mobile:fixed mobile:bottom-0 mobile:justify-center mobile:p-0">
@@ -104,17 +114,19 @@ function Footer(props: any) {
                   borderLeftWidth: 0,
                   borderBottomWidth: 0,
                   borderTopWidth: 0,
-                  ":focus": {
-                    backgroundColor: "#004744",
-                    color: "white",
-                  },
                 }}
-                components={
-                  {
-                    // previous:next,
-                    // next:"Next",
-                  }
-                }
+                components={{
+                  next: (props) => (
+                    <li {...props} className="text-xs">
+                      Next
+                    </li>
+                  ),
+                  previous: (props) => (
+                    <li {...props} className="text-xs">
+                      Previous
+                    </li>
+                  ),
+                }}
                 {...item}
               />
             )}
@@ -125,12 +137,13 @@ function Footer(props: any) {
               borderWidth: "1px",
               borderColor: "#D9D9D9",
             }}
-            // variant="outlined"
             count={Math.ceil(listProducts.length / perRowPage)} // kiểm tra giá trị
+            siblingCount={0}
             shape="rounded"
             onChange={handlePageNumber}
             page={pageNumberPagination}
           />
+          {/* <MyPagination/> */}
         </div>
       </div>
     </div>

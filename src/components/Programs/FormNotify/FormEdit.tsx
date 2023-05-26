@@ -36,7 +36,7 @@ function FormEdit(props: any) {
               <Button
                 sx={{
                   height: "26px",
-                  width: "94px",
+                  width: "85px",
                   backgroundColor: "grey",
                   fontSize: "14px",
                   color: "#004744",
@@ -54,11 +54,11 @@ function FormEdit(props: any) {
                 sx={{
                   fontFamily: "Exo",
                   height: "26px",
-                  width: "94px",
+                  width: "72px",
                   backgroundColor: "#004744",
                   fontSize: "14px",
                   color: "white",
-                  marginLeft: "10px",
+                  marginLeft: "7px",
                   ":hover":{
                     backgroundColor:"#004744"
                   }

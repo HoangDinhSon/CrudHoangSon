@@ -75,6 +75,7 @@ function Programs(props: any) {
       )}
       {isDisplayVieForm && <FormView hiddenViewForm={hiddenViewForm} 
       idAndStatusForView={idAndStatusForView}
+      displayEditForm={displayEditForm}
       />}
     </div>
   );

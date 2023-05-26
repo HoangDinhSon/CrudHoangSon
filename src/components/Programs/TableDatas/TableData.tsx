@@ -7,7 +7,7 @@ import {
 } from "@mui/material";
 import TableDetail from "./TableDetail";
 import { StyleTableCell } from "./tabbleCSS";
-
+//valueRowPerPage*(valuePageNumber-1)+index
 function TableData(props: any) {
   //vào
   const listProducts = props.listProducts;
@@ -64,7 +64,7 @@ function TableData(props: any) {
                   <TableDetail
                     key={product.id}
                     product={product}
-                    index={index}
+                    index={valueRowPerPage*(valuePageNumber-1)+index}
                     displayFromDelete={displayFromDelete}
                     displayEditForm={displayEditForm}
                     displayAndPutDataForFormView={displayAndPutDataForFormView}

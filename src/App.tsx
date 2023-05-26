@@ -5,7 +5,7 @@ import Programs from "./components/Programs";
 import toast, { Toaster } from "react-hot-toast";
 const port = import.meta.env.VITE_PORT;
 
-import { findIndex, clonelistProducts, cloneObj } from "./handle-logic";
+import { findIndex, clonelistProducts, cloneObj ,getWidthScreen } from "./handle-logic";
 import {
   VALUE_PAGE_NUMBER,
   VALUE_ROW_PER_PAGE,
@@ -215,6 +215,9 @@ function App() {
     setRowPerPage(rowPerPage);
   };
   const handlePagination = (rowPerPage: number, pageNumber: number) => {};
+  // 
+
+  
 
 
   

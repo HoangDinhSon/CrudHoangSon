@@ -72,4 +72,9 @@ const useViewport = () => {
 
   return { width };
 };
-export { findIndex, clonelistProducts, cloneObj,useViewport };
+// get screen 
+
+ const getWidthScreen =():number =>{
+  return screen.width;
+ }
+export { findIndex, clonelistProducts, cloneObj,useViewport ,getWidthScreen};
