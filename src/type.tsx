@@ -20,7 +20,20 @@ type outputAddForm = {
   stock: number;
   status: boolean;
 };
-// widht Screen , height Screen
+// Mui config 
+declare module "@mui/material/styles"{
+  interface BreakpointOverides{
+    xs:true,
+    sm:true,
+    md:false, 
+    lg: true,
+    xl : true,
+    mobile :true,
+    tablet:true,
+    laptop: true,
+    desktop:true,
+  }
+}
 
 
 export type { InputEditForm, InputAddForm, outputAddForm };

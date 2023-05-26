@@ -1,7 +1,6 @@
 import { Fill, MyIconSeachBody, MyIconSearchHeader } from "../../../myIconMui";
 import { Button, OutlinedInput } from "@mui/material";
-import "./respon_search.css";
-import { Fragment } from "react";
+
 function Search(props: any) {
   const displayAddForm = props.displayAddForm;
   const getDataFromSearch = props.getDataFromSearch;

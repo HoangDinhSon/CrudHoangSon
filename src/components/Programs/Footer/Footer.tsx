@@ -1,16 +1,20 @@
 // import {makeStyles} from "@material-ui/core/styles";
-import { Pagination, PaginationItem } from "@mui/material";
+import {
+  Pagination,
+  PaginationItem,
+  TablePagination,
+  TableFooter,
+} from "@mui/material";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import { useEffect, useState } from "react";
 import { VALUE_ROW_PER_PAGE } from "../../../const";
 
-import {getWidthScreen} from "../../../handle-logic";
-import {VIEW_PORT} from "../../../const";
+import { getWidthScreen } from "../../../handle-logic";
+import { VIEW_PORT } from "../../../const";
 
 function Footer(props: any) {
-
   const [perRowPage, setPerRowPage] = useState(VALUE_ROW_PER_PAGE);
   const [pageNumberPagination, setPageNumberPagination] = useState(1);
 
@@ -42,12 +46,13 @@ function Footer(props: any) {
     }
   }, [listProducts.length]);
   const viewPoint = getWidthScreen();
-  useEffect(()=>{
-    if (viewPoint<VIEW_PORT.sm){
+  let flagPagination = false;
+  useEffect(() => {
+    if (viewPoint < VIEW_PORT.sm) {
       setPerRowPage(20);
+      flagPagination = true;
     }
-  },[viewPoint]);
-
+  }, [viewPoint]);
 
   return (
     <div className="wrap w-full overflow-hidden h-[50px] p-[15px] z-5 text-[#666666]  fixed bottom-0 flex justify-between items-center mobile:fixed mobile:bottom-0 mobile:justify-center mobile:p-0">
@@ -98,7 +103,10 @@ function Footer(props: any) {
           </FormControl>
         </div>
         <div className="NavigationPage h-[38px] ml-[15px] mobile:m-0 ">
-          <Pagination
+          {!flagPagination&&<Pagination
+            sx={{
+              "& .Mui-selected": { backgroundColor: "#004744" },
+            }}
             renderItem={(item) => (
               <PaginationItem
                 sx={{
@@ -141,7 +149,16 @@ function Footer(props: any) {
             shape="rounded"
             onChange={handlePageNumber}
             page={pageNumberPagination}
-          />
+          />}
+          {/* {flagPagination&&<TablePagination
+                rowsPerPageOptions={[5, 10, 20]}
+                component="div"
+                count={Math.ceil(listProducts.length / perRowPage)}
+                rowsPerPage={perRowPage}
+                page={pageNumberPagination}
+                onPageChange={handlePageNumber}
+                // onRowsPerPageChange={handleSelectInput}
+            />} */}
           {/* <MyPagination/> */}
         </div>
       </div>

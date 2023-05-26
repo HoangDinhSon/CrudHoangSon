@@ -1,4 +1,3 @@
-import Program from "./Program";
 import Search from "./Search";
 import { TableData } from "./TableDatas";
 import { Footer } from "./Footer";
@@ -34,7 +33,6 @@ function Programs(props: any) {
 
   return (
     <div>
-      <Program />
       <Search
         displayAddForm={displayAddForm}
         getDataFromSearch={getDataFromSearch}
