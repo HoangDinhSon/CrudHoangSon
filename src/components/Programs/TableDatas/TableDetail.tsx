@@ -25,27 +25,28 @@ function TableDetail(props: any) {
   };
   return (
       <StyledTableRow>
-        <StyleTableCell sx={{ width: "7px" , overflow:"hidden" , boxSizing:"border-box"}}>{index + 1}</StyleTableCell>
+        <StyleTableCell sx={{ width: "29px" }}>{index + 1}</StyleTableCell>
         <StyleTableCell sx={{ width: "181px" }}>{product.title}</StyleTableCell>
         <StyleTableCell
           sx={{
             width: "700px",
-            display:{
-              xs:"none",
-              sm:"table-cell"
-            }
+            display: {
+              xs: "none",
+              sm: "table-cell",
+            },
           }}
+          style= {{ width: "700px"}}
         >
           {product.description}
         </StyleTableCell>
 
-        <StyleTableCell sx={{width: "30px"  }}>{product.price}</StyleTableCell>
+        <StyleTableCell sx={{ width: "30px" }}>{product.price}</StyleTableCell>
         <StyleTableCell sx={{ width: "30px" }}>{product.stock}</StyleTableCell>
 
-        <StyleTableCell sx={{ width: "133px" }}>
+        <StyleTableCell sx={{ width: "50px" }}>
           {product.status ? <MyIconSwitchOn /> : <MyIconSwitchOff />}
         </StyleTableCell>
-        
+
         <StyleTableCell
           style={{
             color: "#004744",
@@ -65,11 +66,10 @@ function TableDetail(props: any) {
         </StyleTableCell>
 
         <StyleTableCell
-          sx={{  paddingLeft: "0", cursor: "pointer",  }}
+          sx={{ paddingLeft: "0", cursor: "pointer"  }}
           style={{
             color: "#004744",
             fontWeight: "500",
-           
           }}
           onClick={() => {
             handleEdit(product.id);
@@ -79,7 +79,7 @@ function TableDetail(props: any) {
         </StyleTableCell>
 
         <StyleTableCell
-          sx={{ cursor: "pointer" }}// width: "47px",
+          sx={{ cursor: "pointer" }} // width: "47px",
           style={{
             color: "#7C7B7B",
           }}
@@ -87,7 +87,6 @@ function TableDetail(props: any) {
         >
           DELETE
         </StyleTableCell>
-
       </StyledTableRow>
   );
 }

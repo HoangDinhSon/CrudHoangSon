@@ -24,32 +24,31 @@ function TableData(props: any) {
   //Responsive
 
   return (
-    <div className="Wrap w-screen">
+    <div className="Wrap w-full overflow-hidden">
       <TableContainer>
-        <Table>
+        <Table style={{width:"100%"}}>
           <TableHead>
             <TableRow>
               <StyleTableCell sx={{ width: "29px" }}>STT</StyleTableCell>
               <StyleTableCell sx={{ width: "181px" }}>Title</StyleTableCell>
               <StyleTableCell
                 sx={{
-                  width: "306px",
+                  width: "700px",
                   display: {
                     xs: "none",
                     sm: "table-cell",
                   },
                 }}
-                className="res_des"
               >
                 Description
               </StyleTableCell>
-              <StyleTableCell sx={{ width: "306px" }}>Price </StyleTableCell>
-              <StyleTableCell sx={{ width: "306px" }}> Stock</StyleTableCell>
-              <StyleTableCell sx={{ width: "133px" }}>Status</StyleTableCell>
+              <StyleTableCell sx={{ width: "30px" }}>Price </StyleTableCell>
+              <StyleTableCell sx={{ width: "30px" }}> Stock</StyleTableCell>
+              <StyleTableCell sx={{ width: "50px" }}>Status</StyleTableCell>
               <StyleTableCell sx={{ width: "20px", paddingRight: "0" }}>
                 View
               </StyleTableCell>
-              <StyleTableCell sx={{ width: "20px" }}>{""}</StyleTableCell>
+              <StyleTableCell sx={{ width: "" }}>{""}</StyleTableCell>
               <StyleTableCell sx={{ width: "" }}>{""}</StyleTableCell>
             </TableRow>
           </TableHead>
@@ -74,7 +73,7 @@ function TableData(props: any) {
             <TableRow
               sx={{
                 height: "76px",
-                width: "20px",
+                // width: "20px",
                 paddingLeft: "20px",
                 paddingRight: 0,
               }}

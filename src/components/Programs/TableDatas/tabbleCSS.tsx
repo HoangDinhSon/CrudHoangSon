@@ -18,22 +18,22 @@ const StyleTableCell: any = styled(TableCell)(({ theme }) => ({
     fontFamily: "Exo",
     color: "#181818",
     fontSize: "12px",
-    boxSizing: "border-box",
+    // boxSizing: "border-box",
   },
 }));
 // style for table row
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
   "&:nth-of-type(even)": {
     backgroundColor: theme.palette.action.hover,
-    padding: "5px",
+    // padding: "5px",
   },
   "&:nth-of-type(odd)": {
     // backgroundColor: theme.palette.action.hover,
-    padding: "5px",
+    // padding: "5px",
   },
   // hide last border
   "&:last-child td, &:last-child th": {
-    border: 0,
+    // border: 0,
   },
 }));
 

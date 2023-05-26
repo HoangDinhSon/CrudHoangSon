@@ -50,7 +50,7 @@ function Footer(props: any) {
 
 
   return (
-    <div className="wrap w-full h-[50px] p-[15px] z-5 text-[#666666]  fixed bottom-0 flex justify-between items-center mobile:fixed mobile:bottom-0 mobile:justify-center mobile:p-0">
+    <div className="wrap w-full overflow-hidden h-[50px] p-[15px] z-5 text-[#666666]  fixed bottom-0 flex justify-between items-center mobile:fixed mobile:bottom-0 mobile:justify-center mobile:p-0">
       <div className="leftFooter text-[13px] mobile:hidden">
         <p>Showing 1 to 10 of 32,316 entries</p>
       </div>
@@ -138,7 +138,6 @@ function Footer(props: any) {
               borderColor: "#D9D9D9",
             }}
             count={Math.ceil(listProducts.length / perRowPage)} // kiểm tra giá trị
-            siblingCount={0}
             shape="rounded"
             onChange={handlePageNumber}
             page={pageNumberPagination}

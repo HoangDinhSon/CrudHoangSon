@@ -30,10 +30,10 @@ const ID_AND_STATUS_fORMVIEW = {
    price:0,
    description:""
   }
-  // viewpoint 
+  // viewpoint , response theo min 
 const  VIEW_PORT  ={
   xs: 0,
-  sm: 376, // phone
+  sm: 413, // phone
   md: 601,  // tablets
   lg: 901, // small laptop
   xl: 1201,// desktop

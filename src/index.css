@@ -3,7 +3,7 @@
 @tailwind utilities;
 html{
     font-family: "Exo";
-    
+    /* overflow-x: hidden; */
 }
 body {
     height: 100vh;
