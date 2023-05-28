@@ -20,20 +20,18 @@ type outputAddForm = {
   stock: number;
   status: boolean;
 };
-// Mui config 
-declare module "@mui/material/styles"{
-  interface BreakpointOverides{
-    xs:true,
-    sm:true,
-    md:false, 
-    lg: true,
-    xl : true,
-    mobile :true,
-    tablet:true,
-    laptop: true,
-    desktop:true,
-  }
-}
+type PropsFooter = {
+  pageNumber: (x: number) => void;
+  rowPerPage: (x: number) => void;
+  listProducts: Array<{
+    title: string;
+    description: string;
+    price: number;
+    stock: number;
+    status: boolean;
+    id:number;
+  }>;
+  handlePagination: (x: number, y: number) => void;
+};
 
-
-export type { InputEditForm, InputAddForm, outputAddForm };
+export type { InputEditForm, InputAddForm, outputAddForm, PropsFooter };

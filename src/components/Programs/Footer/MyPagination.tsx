@@ -8,14 +8,14 @@ const List = styled("ul")({
   margin: 0,
   display: "flex",
   justifyContent:"space-between",
-  width: 200,
+  width: 500,
   fontSize:12,
   border:"1px solid #e5e7eb",
   height: 38,
   alignItems:"center",
 });
 
-const COUNT_PAGINATION = 10;
+const COUNT_PAGINATION = 20;
 
 function MyPagination() {
   const { items } = usePagination({ count: COUNT_PAGINATION });

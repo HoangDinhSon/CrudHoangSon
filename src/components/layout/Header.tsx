@@ -8,8 +8,8 @@ import {
   
   function Header() {
     return (
-      <div className="Wrap font-[Exo]">
-        <div className="w-full h-[50] bg-[#E5E5E5] flex justify-between ">
+      <div className="WrapHeader font-[Exo] h-[50px]">
+        <div className="w-full h-[50] bg-[#E5E5E5] flex justify-between  fixed z-[2] ">
           <div className="header-left  flex ">
             <div className="inline-block  ">
               <IconMenu

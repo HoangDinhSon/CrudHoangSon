@@ -31,12 +31,16 @@ const ID_AND_STATUS_fORMVIEW = {
    description:""
   }
   // viewpoint , response theo min 
-const  VIEW_PORT  ={
+const  VIEW_PORT ={
   xs: 0,
   sm: 413, // phone
   md: 601,  // tablets
   lg: 901, // small laptop
   xl: 1201,// desktop
+  mobile:413,
+  tablet:601,
+  laptop:901,
+  desktop:1400,
 } 
 
 export {

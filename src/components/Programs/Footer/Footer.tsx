@@ -2,19 +2,18 @@
 import {
   Pagination,
   PaginationItem,
-  TablePagination,
-  TableFooter,
+  useMediaQuery,
 } from "@mui/material";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import { useEffect, useState } from "react";
 import { VALUE_ROW_PER_PAGE } from "../../../const";
+import { PropsFooter } from "../../../type";
+import { useTheme } from "@mui/material";
 
-import { getWidthScreen } from "../../../handle-logic";
-import { VIEW_PORT } from "../../../const";
 
-function Footer(props: any) {
+function Footer(props: PropsFooter) {
   const [perRowPage, setPerRowPage] = useState(VALUE_ROW_PER_PAGE);
   const [pageNumberPagination, setPageNumberPagination] = useState(1);
 
@@ -45,14 +44,9 @@ function Footer(props: any) {
       setPageNumberPagination(pageNumberPagination - 1);
     }
   }, [listProducts.length]);
-  const viewPoint = getWidthScreen();
-  let flagPagination = false;
-  useEffect(() => {
-    if (viewPoint < VIEW_PORT.sm) {
-      setPerRowPage(20);
-      flagPagination = true;
-    }
-  }, [viewPoint]);
+  // response 
+  const theme = useTheme();
+  const matchMaxWidthXs= useMediaQuery(theme.breakpoints.down('md'));
 
   return (
     <div className="wrap w-full overflow-hidden h-[50px] p-[15px] z-5 text-[#666666]  fixed bottom-0 flex justify-between items-center mobile:fixed mobile:bottom-0 mobile:justify-center mobile:p-0">
@@ -103,7 +97,9 @@ function Footer(props: any) {
           </FormControl>
         </div>
         <div className="NavigationPage h-[38px] ml-[15px] mobile:m-0 ">
-          {!flagPagination&&<Pagination
+          <Pagination
+           siblingCount={matchMaxWidthXs?0:1}
+           boundaryCount={0}
             sx={{
               "& .Mui-selected": { backgroundColor: "#004744" },
             }}
@@ -122,6 +118,7 @@ function Footer(props: any) {
                   borderLeftWidth: 0,
                   borderBottomWidth: 0,
                   borderTopWidth: 0,
+                  boundaryCount:2,
                 }}
                 components={{
                   next: (props) => (
@@ -149,17 +146,7 @@ function Footer(props: any) {
             shape="rounded"
             onChange={handlePageNumber}
             page={pageNumberPagination}
-          />}
-          {/* {flagPagination&&<TablePagination
-                rowsPerPageOptions={[5, 10, 20]}
-                component="div"
-                count={Math.ceil(listProducts.length / perRowPage)}
-                rowsPerPage={perRowPage}
-                page={pageNumberPagination}
-                onPageChange={handlePageNumber}
-                // onRowsPerPageChange={handleSelectInput}
-            />} */}
-          {/* <MyPagination/> */}
+          />
         </div>
       </div>
     </div>

@@ -38,7 +38,6 @@ function Search(props: any) {
   };
 
   return (
-    
       <div className="Wrap py-[19px] px-[15px]  flex justify-between font-[Exo] mobile:block mobile:py-[10px] mobile:px-[1]">
         <div className="search w-[400px] h-8 flex items-center mobile:justify-between mobile:w-full ">
           <div className="relative">
@@ -105,7 +104,7 @@ function Search(props: any) {
           <Button
             className="w-[103px] h-[32px] "
             sx={{
-              width:"100%",
+              width: "100%",
               fontSize: 12,
               backgroundColor: "#004744",
               fontFamily: "Exo",
@@ -120,7 +119,6 @@ function Search(props: any) {
           </Button>
         </div>
       </div>
- 
   );
 }
 

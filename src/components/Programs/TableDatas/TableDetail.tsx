@@ -29,11 +29,11 @@ function TableDetail(props: any) {
         <StyleTableCell sx={{ width: "181px" }}>{product.title}</StyleTableCell>
         <StyleTableCell
           sx={{
-            width: "700px",
-            display: {
-              xs: "none",
-              sm: "table-cell",
-            },
+            width: {xs : "500px", sm : "700px"},
+            // display: {
+            //   xs: "none",
+            //   sm: "table-cell",
+            // },
           }}
           style= {{ width: "700px"}}
         >

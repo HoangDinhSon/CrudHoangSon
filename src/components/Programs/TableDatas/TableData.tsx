@@ -24,20 +24,23 @@ function TableData(props: any) {
   //Responsive
 
   return (
-    <div className="Wrap w-full overflow-hidden">
+    <div className="Wrap w-full mobile:overflow-auto ">
       <TableContainer>
-        <Table style={{width:"100%"}}>
+        <Table
+          sx={{
+            minWidth: {
+              xs: 700,
+              sm: "100%",
+            },
+          }}
+        >
           <TableHead>
             <TableRow>
               <StyleTableCell sx={{ width: "29px" }}>STT</StyleTableCell>
               <StyleTableCell sx={{ width: "181px" }}>Title</StyleTableCell>
               <StyleTableCell
                 sx={{
-                  width: "700px",
-                  display: {
-                    xs: "none",
-                    sm: "table-cell",
-                  },
+                  width: { xs: "500px", sm: "700px" },
                 }}
               >
                 Description
@@ -63,7 +66,7 @@ function TableData(props: any) {
                   <TableDetail
                     key={product.id}
                     product={product}
-                    index={valueRowPerPage*(valuePageNumber-1)+index}
+                    index={valueRowPerPage * (valuePageNumber - 1) + index}
                     displayFromDelete={displayFromDelete}
                     displayEditForm={displayEditForm}
                     displayAndPutDataForFormView={displayAndPutDataForFormView}

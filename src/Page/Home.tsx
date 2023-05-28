@@ -1,12 +1,26 @@
-import  {Footer}  from "../components/Programs/Footer";
+import { Footer } from "../components/Programs/Footer";
+import {listProduction}  from "../../dummyData";
 
 function Home() {
+  const pageNumber = (page:number)=>{
+    console.log("page: >>",page);
+    
+  }
+  const rowPerPage = (rowPer:number)=>{
+    console.log("rowPer>>>",rowPer);
+    
+  }
+  const handlePagination = (payload: any) => {
+    console.log("payload>>>",payload);
+  };
   return (
     <div>
-        <h1>Hello</h1>
-      <div>
-      <Footer/>
-      </div>
+        <Footer
+          rowPerPage={rowPerPage}
+          pageNumber={pageNumber}
+          listProducts={listProduction}
+          handlePagination={handlePagination}
+        />
     </div>
   );
 }
