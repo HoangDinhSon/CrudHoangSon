@@ -53,13 +53,13 @@ function Footer(props: PropsFooter) {
       <div className="leftFooter text-[13px] mobile:hidden">
         <p>Showing 1 to 10 of 32,316 entries</p>
       </div>
-      <div className="rightFooter text-[12px] flex justify-end items-center">
+      <div className="rightFooter text-[12px] flex justify-end items-center mobile:justify-between">
         <div className="rowPerPage  ">
           <FormControl>
             <Select
               sx={{
                 height: "38px",
-                width: "132px",
+                width: "110px",
                 fontSize: "12px",
                 fontFamily: "Exo",
               }}
@@ -96,7 +96,7 @@ function Footer(props: PropsFooter) {
             </Select>
           </FormControl>
         </div>
-        <div className="NavigationPage h-[38px] ml-[15px] mobile:m-0 ">
+        <div className="NavigationPage h-[38px] ml-[15px] mobile:ml-3 ">
           <Pagination
            siblingCount={matchMaxWidthXs?0:1}
            boundaryCount={0}
@@ -120,7 +120,7 @@ function Footer(props: PropsFooter) {
                   borderTopWidth: 0,
                   boundaryCount:2,
                 }}
-                components={{
+                components={!matchMaxWidthXs?{
                   next: (props) => (
                     <li {...props} className="text-xs">
                       Next
@@ -131,7 +131,7 @@ function Footer(props: PropsFooter) {
                       Previous
                     </li>
                   ),
-                }}
+                }:{}}
                 {...item}
               />
             )}
