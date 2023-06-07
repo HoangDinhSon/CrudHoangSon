@@ -1,7 +1,7 @@
 {
   "name": "crud",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -16,6 +16,7 @@
     "@mui/icons-material": "^5.11.16",
     "@mui/material": "^5.13.0",
     "@tanstack/react-query": "^4.29.7",
+    "@tanstack/react-query-devtools": "^4.29.12",
     "axios": "^1.4.0",
     "devtools": "^8.10.4",
     "lodash": "^4.17.21",

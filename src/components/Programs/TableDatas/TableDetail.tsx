@@ -2,7 +2,8 @@ import { MyIconSwitchOff, MyIconSwitchOn } from "../../../myIconMui";
 import { StyledTableRow, StyleTableCell } from "./tabbleCSS";
 function TableDetail(props: any) {
   const product = props.product;
-  const index = props.index;
+  const index = props.ordinalNumber;
+
   const displayFromDelete = props.displayFromDelete;
   const displayEditForm = props.displayEditForm;
   const displayAndPutDataForFormView = props.displayAndPutDataForFormView;
@@ -30,10 +31,6 @@ function TableDetail(props: any) {
         <StyleTableCell
           sx={{
             width: {xs : "500px", sm : "700px"},
-            // display: {
-            //   xs: "none",
-            //   sm: "table-cell",
-            // },
           }}
           style= {{ width: "700px"}}
         >

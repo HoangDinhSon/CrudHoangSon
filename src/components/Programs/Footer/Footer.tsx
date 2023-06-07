@@ -1,9 +1,5 @@
 // import {makeStyles} from "@material-ui/core/styles";
-import {
-  Pagination,
-  PaginationItem,
-  useMediaQuery,
-} from "@mui/material";
+import { Pagination, PaginationItem, useMediaQuery } from "@mui/material";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
@@ -11,18 +7,32 @@ import { useEffect, useState } from "react";
 import { VALUE_ROW_PER_PAGE } from "../../../const";
 import { PropsFooter } from "../../../type";
 import { useTheme } from "@mui/material";
-
-
+import { useGetAllProducts } from "../../../Api/Query";
+import { useQuery } from "@tanstack/react-query";
+import logTimeApi from "../../../Api/logTimeApi";
+const PAGE_DEFAULT = 1;
 function Footer(props: PropsFooter) {
-  const [perRowPage, setPerRowPage] = useState(VALUE_ROW_PER_PAGE);
-  const [pageNumberPagination, setPageNumberPagination] = useState(1);
-
+  
+  
+  // props
   const pageNumber = props.pageNumber;
   const rowPerPage = props.rowPerPage;
-  const listProducts = props.listProducts;
-  const handlePagination = props.handlePagination;
+  const listproducts = props.listProducts;
+  const keyWhenDeleteSuccess= props?.keyWhenDeleteSuccess;
+  //state
 
-  const handleSelectInput = (e: any, value: any) => {
+  const [perRowPage, setPerRowPage] = useState(VALUE_ROW_PER_PAGE);
+  const [pageNumberPagination, setPageNumberPagination] =
+    useState(PAGE_DEFAULT);
+  const theme = useTheme();
+  const matchMaxWidthXs = useMediaQuery(theme.breakpoints.down("md"));
+  const {data}= useQuery({
+    queryKey: ['products',keyWhenDeleteSuccess ],
+    queryFn: () => logTimeApi.getAll,
+  })
+  console.log("footer data>>>",data);
+
+  const handleSelectInput = (e: any) => {
     setPerRowPage(e.target.value);
     setPageNumberPagination(
       Math.ceil(
@@ -34,19 +44,16 @@ function Footer(props: PropsFooter) {
     setPageNumberPagination(value);
   };
   useEffect(() => {
-    handlePagination(perRowPage, pageNumberPagination);
     rowPerPage(perRowPage);
     pageNumber(pageNumberPagination);
-  }, [perRowPage, pageNumberPagination]);
-
+  });
   useEffect(() => {
-    if (pageNumberPagination > Math.ceil(listProducts.length / perRowPage)) {
+    if (pageNumberPagination > Math.ceil(listproducts.length / perRowPage)) {
       setPageNumberPagination(pageNumberPagination - 1);
     }
-  }, [listProducts.length]);
-  // response 
-  const theme = useTheme();
-  const matchMaxWidthXs= useMediaQuery(theme.breakpoints.down('md'));
+  });
+
+  // response
 
   return (
     <div className="wrap w-full overflow-hidden h-[50px] p-[15px] z-5 text-[#666666]  fixed bottom-0 flex justify-between items-center mobile:fixed mobile:bottom-0 mobile:justify-center mobile:p-0">
@@ -98,8 +105,8 @@ function Footer(props: PropsFooter) {
         </div>
         <div className="NavigationPage h-[38px] ml-[15px] mobile:ml-3 ">
           <Pagination
-           siblingCount={matchMaxWidthXs?0:1}
-           boundaryCount={0}
+            siblingCount={matchMaxWidthXs ? 0 : 1}
+            boundaryCount={0}
             sx={{
               "& .Mui-selected": { backgroundColor: "#004744" },
             }}
@@ -118,20 +125,24 @@ function Footer(props: PropsFooter) {
                   borderLeftWidth: 0,
                   borderBottomWidth: 0,
                   borderTopWidth: 0,
-                  boundaryCount:2,
+                  boundaryCount: 2,
                 }}
-                components={!matchMaxWidthXs?{
-                  next: (props) => (
-                    <li {...props} className="text-xs">
-                      Next
-                    </li>
-                  ),
-                  previous: (props) => (
-                    <li {...props} className="text-xs">
-                      Previous
-                    </li>
-                  ),
-                }:{}}
+                components={
+                  !matchMaxWidthXs
+                    ? {
+                        next: (props) => (
+                          <li {...props} className="text-xs">
+                            Next
+                          </li>
+                        ),
+                        previous: (props) => (
+                          <li {...props} className="text-xs">
+                            Previous
+                          </li>
+                        ),
+                      }
+                    : {}
+                }
                 {...item}
               />
             )}
@@ -142,7 +153,7 @@ function Footer(props: PropsFooter) {
               borderWidth: "1px",
               borderColor: "#D9D9D9",
             }}
-            count={Math.ceil(listProducts.length / perRowPage)} // kiểm tra giá trị
+            count={Math.ceil(listproducts.length / perRowPage)} // kiểm tra giá trị
             shape="rounded"
             onChange={handlePageNumber}
             page={pageNumberPagination}

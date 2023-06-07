@@ -67,8 +67,9 @@ function Search(props: any) {
               placeholder="   Search programs"
               color="success"
               size="small"
-              className="h-[32px] w-[202px]"
+              className="w-[202px]"
               sx={{
+                height:32,
                 paddingLeft: "16px",
                 outline: "none",
                 fontFamily: "Exo",
@@ -82,8 +83,9 @@ function Search(props: any) {
 
           <div className="ml-[7px] relative">
             <Button
-              className="h-[32px] w-[100px]  "
+              className="w-[100px]  "
               sx={{
+                height:32,
                 backgroundColor: "#EFEFEF",
                 color: "black",
                 fontFamily: "Exo",
@@ -102,8 +104,9 @@ function Search(props: any) {
         </div>
         <div className="add-station  mobile:mx-0 mobile:my-1">
           <Button
-            className="w-[103px] h-[32px] "
+            className="w-[103px] "
             sx={{
+              height:32,
               width: "100%",
               fontSize: 12,
               backgroundColor: "#004744",

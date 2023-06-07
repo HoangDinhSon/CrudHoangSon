@@ -1,4 +1,4 @@
-const listProduction = [
+const listProductionDummyData = [
   {
     id: 1,
     title: "IPhone 1 ",
@@ -96,4 +96,4 @@ const listProduction = [
     stock: 1,
   },
 ];
-export {listProduction}
+export {listProductionDummyData}

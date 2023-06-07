@@ -12,7 +12,7 @@ export default defineConfig(({mode , command})=>{
         port: Number(env.VITE_PORT),
       },
       define:{
-        __PORT__:env.VITE_PORT,
+        
       }
     }
   )

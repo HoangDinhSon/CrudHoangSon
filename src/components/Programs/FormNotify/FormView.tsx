@@ -1,11 +1,22 @@
 import { Button } from "@mui/material";
-import { TextField, Box, Select, MenuItem, styled } from "@mui/material";
-import { ReactHTMLElement } from "react";
+import { TextField, Box, Select, MenuItem } from "@mui/material";
+import { useQuery } from "@tanstack/react-query";
+import logTimeApi from "../../../Api/logTimeApi";
 
 function FormView(props: any) {
   const hiddenViewForm = props.hiddenViewForm;
   const idAndStatusForView = props.idAndStatusForView;
   const displayEditForm = props.displayEditForm;
+  const queryForAProduct = useQuery({
+    queryKey: ["products", idAndStatusForView.id],
+    queryFn: () => logTimeApi.getAProduct(idAndStatusForView.id),
+    onSuccess: (res) => {
+      console.log(">>> response", res);
+    },
+  });
+  const data = queryForAProduct.data;
+  const status = queryForAProduct.status
+  
 
   const handleCancel = () => {
     hiddenViewForm();
@@ -14,10 +25,17 @@ function FormView(props: any) {
     hiddenViewForm();
   };
   const handleEdit = () => {
-    displayEditForm(idAndStatusForView.id, idAndStatusForView.status);
+    displayEditForm(idAndStatusForView.id , idAndStatusForView.status);
     hiddenViewForm();
   };
 
+
+  if (status === "loading"){
+    return (<div>Loading....</div>)
+  }
+  if (status === "error"){
+    return (<div>error....</div>)
+  }
   return (
     <div className="wrap_form_view  ">
       <div
@@ -62,22 +80,18 @@ function FormView(props: any) {
               }}
             >
               <h1>Title</h1>
-              <TextField
-                name="title"
-                defaultValue={idAndStatusForView?.title}
-                disabled
-              />
+              <TextField name="title" defaultValue={data?.title} disabled />
               <h1>Description</h1>
               <TextField
                 disabled
-                defaultValue={idAndStatusForView?.description}
+                defaultValue={data?.description}
               />
               <h1>Price</h1>
-              <TextField disabled defaultValue={idAndStatusForView?.price} />
+              <TextField disabled defaultValue={data?.price} />
               <h1>Stock</h1>
-              <TextField disabled defaultValue={idAndStatusForView?.stock} />
+              <TextField disabled defaultValue={data?.stock} />
               <h1>Status</h1>
-              <Select disabled defaultValue={idAndStatusForView.status ? 1 : 0}>
+              <Select disabled defaultValue={data.status ? 1 : 0}>
                 <MenuItem value={1}>On</MenuItem>
                 <MenuItem value={0}>Off</MenuItem>
               </Select>

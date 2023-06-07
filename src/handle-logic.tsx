@@ -1,6 +1,19 @@
-import {useState , useEffect} from "react";
-const findIndex = (id: any, arrayObject: []) => {
-  let indexcurrent;
+/*
+use thư viện để xử lý các nhiệm vụ không phụ thuộc vào bên ngoài 
+
+*/
+type typeProduct ={
+  title: string,
+  description: string,
+  price: number,
+  stock: number,
+  id: number,
+  status: boolean,
+}
+
+// tìm index dựa vào id 
+const findIndex = (id: number, arrayObject: []):number => {
+  let indexcurrent:number=-1;
   arrayObject.map((procduct: any, index: number) => {
     if (procduct.id === id) {
       indexcurrent = index;
@@ -10,71 +23,28 @@ const findIndex = (id: any, arrayObject: []) => {
   return indexcurrent;
 };
 
+// tạo ra một sản phẩm mới có status 
 const clonelistProducts = (listProducts: any) => {
-  const cloneListProduct = listProducts.map((element: any) => {
-    let objNews = {
-      title: null,
-      description: null,
-      price: null,
-      stock: null,
-      id: null,
-      status: false,
-    };
-    objNews.title = element.title;
-    objNews.description = element.description;
-    objNews.price = element.price;
-    objNews.stock = element.stock;
-    objNews.id = element.id;
-    objNews.status = element.status ? true : false;
+  const cloneListProduct = listProducts.map((product: any) => {
+    let objNews :typeProduct;
+    objNews= {...product, status : product.status?true:false}
     return objNews;
   });
   return cloneListProduct;
 };
 // lấy object tạo ra một object mới với các thông số mong muốn
-
-type typeObject = {
-  title: string;
-  description: string;
-  price: number;
-  stock: number;
-  id: number;
-  status: boolean;
-};
-
-const cloneObj = (obj: any): typeObject => {
-  let newObject = {
-    title: "",
-    description: "",
-    price: 0,
-    stock: 0,
-    id: 0,
-    status: false,
-  };
-  newObject.title = obj.title;
-  newObject.description = obj.description;
-  newObject.price = obj.price;
-  newObject.id = obj.id;
-  newObject.stock = obj.stock;
-  newObject.status = obj.status;
+const cloneObj = (obj:any): typeProduct => {
+  let newObject :typeProduct;
+  newObject={...obj, status: obj.status?true:false}
   return newObject;
 };
 
-// get viewPort from trình duyệt 
-
-const useViewport = () => {
-  const [width, setWidth] = useState(window.innerWidth);
-
-  useEffect(() => {
-    const handleWindowResize = () => setWidth(window.innerWidth);
-    window.addEventListener("resize", handleWindowResize);
-    return () => window.removeEventListener("resize", handleWindowResize);
-  }, []);
-
-  return { width };
-};
 // get screen 
-
  const getWidthScreen =():number =>{
   return screen.width;
  }
-export { findIndex, clonelistProducts, cloneObj,useViewport ,getWidthScreen};
+ // tạo ra một chuỗi kí tự ngẫu nhiên
+ // tạo một số từ [a,b]
+ // tạo một số từ (a,b)
+ // 
+ export { findIndex, clonelistProducts, cloneObj ,getWidthScreen};

@@ -1,5 +1,5 @@
 import { Footer } from "../components/Programs/Footer";
-import {listProduction}  from "../../dummyData";
+import {listProductionDummyData}  from "../../dummyData";
 
 function Home() {
   const pageNumber = (page:number)=>{

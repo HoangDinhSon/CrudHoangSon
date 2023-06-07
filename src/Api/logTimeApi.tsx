@@ -30,6 +30,7 @@ const logTimeApi = {
       .then((response) => {
         return response.data;
       }),
+      // ok
   updateByID: (data: any) =>
     axios.put(`https://dummyjson.com/products/${data.id}`, {
       title: data.title,
@@ -38,17 +39,23 @@ const logTimeApi = {
       stock: data.stock,
     }),
   addNewProduct: async (payload: any) => {
-    const response = axios.post("https://dummyjson.com/products/add", {
+    const response = await  axios.post("https://dummyjson.com/products/add", {
       title: payload.title,
       description: payload.description,
       price: payload.price,
       stock: payload.stock,
     });
-    return (await response).data;
+    return response.data;
   },
   delete(id: any): Promise<any> {
     const url = `products/${id}`;
-    return axiosClient.delete(url);
+    const res= axiosClient.delete(url);
+    return res;
+    
   },
+  getAProduct: (id:any)=>  axios.get(`https://dummyjson.com/products/${id}`).then((res)=>(res.data))
+    
+  
+  
 };
 export default logTimeApi;
