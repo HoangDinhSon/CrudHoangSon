@@ -7,20 +7,15 @@ import { useEffect, useState } from 'react';
 import { VALUE_ROW_PER_PAGE } from '../../../const';
 import { PropsFooter } from '../../../type';
 import { useTheme } from '@mui/material';
-import { useGetAllProducts } from '../../../Api/Query';
 import { useQuery } from '@tanstack/react-query';
 import logTimeApi from '../../../Api/logTimeApi';
-import  {listProductionDummyData } from "../../../../dummyData";
 const PAGE_DEFAULT = 1;
 function Footer(props: PropsFooter) {
     // props
     const pageNumber = props.pageNumber;
     const rowPerPage = props.rowPerPage;
-    const listproducts = props.listProducts;
-    const keyWhenDeleteSuccess = props?.keyWhenDeleteSuccess;
     //state
-    // const [listproducts , setListProducts]=useState(listProductionDummyData);
-
+    let  listproducts // = props.listProducts;
     const [perRowPage, setPerRowPage] = useState(VALUE_ROW_PER_PAGE);
     const [pageNumberPagination, setPageNumberPagination] = useState(PAGE_DEFAULT);
     const theme = useTheme();
@@ -31,8 +26,7 @@ function Footer(props: PropsFooter) {
         queryFn: () => logTimeApi.getAll,
     });
     if(status==="success"){
-        // console.log('Footer data.length >>>', data.products.length);
-        // setListProducts(data.products)
+        listproducts=data.products;
         
     }
 

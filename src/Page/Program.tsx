@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import toast, { Toaster } from 'react-hot-toast';
 import { findIndex, clonelistProducts, cloneObj } from '../handle-logic';
+import { searchProductionFromAPI } from '../utils';
 import {
     VALUE_PAGE_NUMBER,
     VALUE_ROW_PER_PAGE,
@@ -18,43 +19,41 @@ import { InputEditForm, outputAddForm } from '../type';
 import logTimeApi from '../Api/logTimeApi';
 const KEY_FOR_DELETE_SUCCESS = -1;
 function Program() {
+    /* STATE */
+    //search Component
+    const [isDisplayAddForm, setIsDisplayAddForm] = useState(IS_DISPLAY_ADD_FORM);
     const [flagSearch, setFlagSearch] = useState(false);
     const [searchKeyWord, setSearchKeyWord] = useState(SEARCH_KEY_WORD);
-    //delete
+    //delete Component
     const [idForDelete, setIdForDelete] = useState(KEY_FOR_DELETE_SUCCESS);
-    const [keyWhenDeleteSuccess, setKeyWhenDeleteSuccess] = useState(KEY_FOR_DELETE_SUCCESS);
     const [isDisplayFormDelete, setIsDisplayFormDelete] = useState(IS_DISPLAY_DELETE_FORM);
-    //update
+    //update Component
     const [idForProductUpdate, setIDForProductUpdate] = useState(ID_FOR_UPDATE);
     const [statusForProduct, setStatusForProduct] = useState(false);
-    // view 
+    // view Component
     const [statusForNewProduct, setStatusForNewProduct] = useState(STATUS_FOR_NEW_PRODUCT);
     const [idAndStatusForView, setIdAndStatusForView] = useState(ID_AND_STATUS_fORMVIEW);
     const [valuePageNumber, setPageNumber] = useState(VALUE_PAGE_NUMBER);
     const [valueRowPerPage, setRowPerPage] = useState(VALUE_ROW_PER_PAGE);
     const [isDisplayEditForm, setIsDisplayEditForm] = useState(IS_DISPLAY_EDIT_fORM);
     const [productForEdit, setProductForEdit] = useState({});
-    const [isDisplayAddForm, setIsDisplayAddForm] = useState(IS_DISPLAY_ADD_FORM);
     const [isDisplayVieForm, setIsDisPlayViewForm] = useState(false);
-
+    /* FUCTION FEATURE*/
     // get All
     const queryResponse = useQuery({
-        queryKey: ['products', ],
+        queryKey: ['products'],
         queryFn: () => logTimeApi.getAll,
-        staleTime:0,// default của chương trình 
-        cacheTime:50000,// default chương trình 
-        onSuccess: () => {
-           
-        },
+        staleTime: 0, // default của chương trình
+        cacheTime: 50000, // default chương trình
+        onSuccess: () => {},
         onError: () => {},
     });
     const data = queryResponse.data;
     const statusQuery = queryResponse.status;
-    // Delete
+    // Delete Component
     const queryDeleteProcduct = useMutation({
         mutationFn: (id: any) => logTimeApi.delete(id),
         onSuccess: (res) => {
-            setKeyWhenDeleteSuccess(idForDelete);
             let index = findIndex(res.data.id, data.products);
             data.products.splice(index, 1);
             toast.success('Delete complited ');
@@ -104,27 +103,13 @@ function Program() {
     const querySearchProduct = useQuery({
         queryKey: ['search', searchKeyWord],
         queryFn: () => logTimeApi.searchProduct(searchKeyWord),
-        enabled:!!searchKeyWord ,
-        onSuccess: (responseAfterSuccess) => {
-            if (searchKeyWord) {
-                setFlagSearch(true);
-                data.products = responseAfterSuccess.products;
-            }
-        },
-        onError: () => {
-            toast.error('Error');
-        },
+        enabled: !!searchKeyWord,
     });
-
-    const queryGetAllProductForSearch = useQuery({
-        queryKey: ['getAllProductForSearch'],
-        queryFn: () => logTimeApi.getAllProductsForSearch(),
-    });
-    useEffect(() => {
-        if (searchKeyWord.length == 0 && flagSearch) {
-            data.products = queryGetAllProductForSearch.data.products;
+    if (querySearchProduct.status === 'success') {
+        if (searchKeyWord) {
+            data.products = querySearchProduct.data.products;
         }
-    }, [searchKeyWord]);
+    }
 
     // hiển thị /ẩn / xóa  form Delete
     const displayFromDelete = (id: any) => {
@@ -175,7 +160,6 @@ function Program() {
     // Search
     const getDataFromSearch = (payloadSearch: any) => {
         setSearchKeyWord(payloadSearch);
-        // console.log(querySearchProduct.data?.data.products);
     };
     // view Form
     const displayAndPutDataForFormView = (
@@ -225,12 +209,7 @@ function Program() {
                         displayEditForm={displayEditForm}
                         displayAndPutDataForFormView={displayAndPutDataForFormView}
                     />
-                    <Footer
-                        pageNumber={pageNumber}
-                        rowPerPage={rowPerPage}
-                        listProducts={clonelistProducts(data.products)}
-                        keyWhenDeleteSuccess={keyWhenDeleteSuccess}
-                    />
+                    <Footer pageNumber={pageNumber} rowPerPage={rowPerPage} />
                     {isDisplayFormDelete && (
                         <FormDelete hiddenFormDelete={hiddenFormDelete} deletePoduct={deletePoduct} />
                     )}

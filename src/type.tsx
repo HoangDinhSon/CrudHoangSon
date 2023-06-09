@@ -23,15 +23,6 @@ type outputAddForm = {
 type PropsFooter = {
     pageNumber: (x: number) => void;
     rowPerPage: (x: number) => void;
-    listProducts: Array<{
-        title: string;
-        description: string;
-        price: number;
-        stock: number;
-        status: boolean;
-        id: number;
-    }>;
-    keyWhenDeleteSuccess?: any;
 };
 type typeProduct = {
     title: string;
