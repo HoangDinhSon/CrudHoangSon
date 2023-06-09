@@ -15,7 +15,6 @@ const StyleTableCell: any = styled(TableCell)(({ theme }) => ({
    
   },
   [`&.${tableCellClasses.root}`]: {
-    fontFamily: "Exo",
     color: "#181818",
     fontSize: "12px",
     

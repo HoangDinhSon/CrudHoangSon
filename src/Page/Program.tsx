@@ -20,13 +20,14 @@ const KEY_FOR_DELETE_SUCCESS = -1;
 function Program() {
     const [flagSearch, setFlagSearch] = useState(false);
     const [searchKeyWord, setSearchKeyWord] = useState(SEARCH_KEY_WORD);
-
+    //delete
     const [idForDelete, setIdForDelete] = useState(KEY_FOR_DELETE_SUCCESS);
     const [keyWhenDeleteSuccess, setKeyWhenDeleteSuccess] = useState(KEY_FOR_DELETE_SUCCESS);
     const [isDisplayFormDelete, setIsDisplayFormDelete] = useState(IS_DISPLAY_DELETE_FORM);
-
+    //update
     const [idForProductUpdate, setIDForProductUpdate] = useState(ID_FOR_UPDATE);
     const [statusForProduct, setStatusForProduct] = useState(false);
+    // view 
     const [statusForNewProduct, setStatusForNewProduct] = useState(STATUS_FOR_NEW_PRODUCT);
     const [idAndStatusForView, setIdAndStatusForView] = useState(ID_AND_STATUS_fORMVIEW);
     const [valuePageNumber, setPageNumber] = useState(VALUE_PAGE_NUMBER);
@@ -38,12 +39,12 @@ function Program() {
 
     // get All
     const queryResponse = useQuery({
-        queryKey: ['products', keyWhenDeleteSuccess],
+        queryKey: ['products', ],
         queryFn: () => logTimeApi.getAll,
         staleTime:0,// default của chương trình 
         cacheTime:50000,// default chương trình 
         onSuccess: () => {
-            console.log('ban đầu chạy >>>> sau đó khi nào id delete thay đổi thì nó chạy ', idForDelete);
+           
         },
         onError: () => {},
     });
@@ -54,9 +55,9 @@ function Program() {
         mutationFn: (id: any) => logTimeApi.delete(id),
         onSuccess: (res) => {
             setKeyWhenDeleteSuccess(idForDelete);
-            // let index = findIndex(res.data.id, data.products);
-            // data.products.splice(index, 1);
-            toast.success('Delete complited1 ');
+            let index = findIndex(res.data.id, data.products);
+            data.products.splice(index, 1);
+            toast.success('Delete complited ');
         },
         onError: () => {
             toast.error("Something wrong you can't delete ");
@@ -69,7 +70,7 @@ function Program() {
             toast.success('Update Complited');
             const idProductForUpdate = dataFrommutation.data.id;
             const index = findIndex(idProductForUpdate, data.products);
-            if (index != undefined) {
+            if (index != -1) {
                 data.products[index].title = dataFrommutation.data.title;
                 data.products[index].description = dataFrommutation.data.description;
                 data.products[index].price = dataFrommutation.data.price;

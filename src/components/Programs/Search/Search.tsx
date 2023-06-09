@@ -20,7 +20,6 @@ function Search(props: any) {
           sx={{
             backgroundColor: "#EFEFEF",
             color: "black",
-            fontFamily: "Exo",
             fontSize: 12,
             padding: 0,
           }}
@@ -72,7 +71,6 @@ function Search(props: any) {
                 height:32,
                 paddingLeft: "16px",
                 outline: "none",
-                fontFamily: "Exo",
                 fontSize: 12,
               }}
               onChange={(e) => {
@@ -88,7 +86,6 @@ function Search(props: any) {
                 height:32,
                 backgroundColor: "#EFEFEF",
                 color: "black",
-                fontFamily: "Exo",
                 fontSize: 12,
               }}
             >
@@ -110,7 +107,6 @@ function Search(props: any) {
               width: "100%",
               fontSize: 12,
               backgroundColor: "#004744",
-              fontFamily: "Exo",
               color: "white",
               ":hover": {
                 backgroundColor: "#004744",

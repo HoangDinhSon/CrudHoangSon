@@ -1,4 +1,3 @@
-import React from "react";
 import usePagination from "@mui/material/usePagination";
 import { styled } from "@mui/material";
 
@@ -15,10 +14,10 @@ const List = styled("ul")({
   alignItems:"center",
 });
 
-const COUNT_PAGINATION = 20;
 
-function MyPagination() {
-  const { items } = usePagination({ count: COUNT_PAGINATION });
+function MyPagination(props:any) {
+  const {count} = props;
+  const { items } = usePagination({ count: count });
 
   return (
     <nav>
@@ -26,7 +25,7 @@ function MyPagination() {
         {items.map(({ page, type, selected, ...item }, index) => {
           let children = null;
           if (type === "start-ellipsis"||type==="end-ellipsis") {
-            children = "...";
+            children = "";
           } else if (type === "page") {
             children = (
               <button

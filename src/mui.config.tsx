@@ -1,5 +1,6 @@
 import { createTheme } from "@mui/material";
 import { VIEW_PORT } from "./const";
+// to add more break point for MUI. 
 declare module "@mui/material/styles" {
   interface BreakpointOverrides {
     xs: true;

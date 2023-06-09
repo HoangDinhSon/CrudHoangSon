@@ -29,7 +29,6 @@ function FormDelete(props: any) {
                 backgroundColor: "grey",
                 fontSize: "14px",
                 color: "#004744",
-                fontFamily: "Exo",
                 ":hover":{
                   backgroundColor: "grey"
                 }
@@ -40,7 +39,6 @@ function FormDelete(props: any) {
             </Button>
             <Button
               sx={{
-                fontFamily: "Exo",
                 height: "26px",
                 width: "94px",
                 backgroundColor: "#004744",

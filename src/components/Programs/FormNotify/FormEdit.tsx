@@ -9,7 +9,7 @@ function FormEdit(props: any) {
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm<InputEditForm>();
+  } = useForm<InputEditForm>(resolverForEditForm);
 
   const hiddenEditForm = props.hiddenEditForm;
   const productForEdit = props.productForEdit;
